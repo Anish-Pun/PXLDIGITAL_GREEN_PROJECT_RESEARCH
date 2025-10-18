@@ -1,0 +1,39 @@
+1. Make sure the tools are installed:
+sudo apt update
+sudo apt install python3-venv python3-pip
+
+2. Create a virtual environment:
+python3 -m venv lora-env
+
+3. Activate the virtual environment:
+source lora-env/bin/activate
+
+
+Your prompt should now show something like:
+
+(lora-env) Milan@Boshi:~ $
+
+4. Now install the library:
+pip install ebyte-lora-e220-rpi
+
+5. Run your script from this environment:
+
+Make sure you're still inside the virtual environment when you run your Python scripts that use the library:
+
+python3 my_lora_script.py
+
+🚨 Unsafe Option (Not Recommended)
+
+If you must install globally, and understand the risks, you can force it with:
+
+pip install ebyte-lora-e220-rpi --break-system-packages
+
+
+⚠️ Warning: This can potentially break system Python tools. Use only if you're okay taking that risk.
+
+🔁 Summary
+Method	Safe?	Recommended?	Notes
+Virtual Env	✅ Yes	✅ Yes	Best practice, clean and portable
+--break-system-packages	❌ No	❌ No	Risky, could break OS tools using Python
+
+Would you like help setting up a script inside the virtual environment too?
