@@ -13,7 +13,7 @@
 | M1        | GND            | Normale modus                        |
 | TX        | RX2             | Pull-up weerstand 4.7kΩ–5.1kΩ        |
 | RX        | TX2             | Pull-up weerstand 4.7kΩ–5.1kΩ        |
-| AUX       | Niet aangesloten| Optioneel voor “busy” status         |
+| AUX       | Niet aangesloten| Optioneel voor status         |
 | VCC       | 3.3 V           | Voeding                              |
 | GND       | GND             | Aarde                                |
 
@@ -27,11 +27,11 @@
 |-----------|-----------------------------|-----------------------------------------|
 | VCC       | 3.3 V                        | Voeding                                 |
 | GND       | GND                          | Aarde                                   |
-| TX        | UART RX (GPIO 15 / /dev/ttyAMA0) | Data van LoRa module naar Pi            |
-| RX        | UART TX (GPIO 14)            | Data van Pi naar LoRa module            |
+| TX        | UART RX (GPIO 15 / /dev/ttyAMA0) | Pull-up weerstand 4.7kΩ–5.1kΩ            |
+| RX        | UART TX (GPIO 14)            | Pull-up weerstand 4.7kΩ–5.1kΩ            |
 | M0        | GND                          | Normale modus                            |
 | M1        | GND                          | Normale modus                            |
-| AUX       | Niet aangesloten             | Optioneel voor “busy” status             |
+| AUX       | Niet aangesloten             | Optioneel voor status             |
 
 ## Opmerkingen
 
