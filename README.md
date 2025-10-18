@@ -1,34 +1,37 @@
 # PXLDIGITAL_GREEN_PROJECT_RESEARCH
 
-## Sender
+## Zender (ESP32/...)
 
-### Sources
-- [Ebyte LoRa E22 Device – Specs and Basic Usage](https://mischianti.org/ebyte-lora-e22-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-1/
-### GPIO's
+### Referentie
+- [Ebyte LoRa E22 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e22-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-1/)
 
-LoRa E220       → ESP32  
-M0              → GND  
-M1              → GND  
-TX              → RX2 (PullUP 4.7kE/5.1kE)
-RX              → TX2 (PullUP 4.7kE/5.1kE)
-AUX             → Not connected
-VCC             → 3.3 V
-GND             → GND
+### GPIO
 
-## Receiver
+| LoRa E220 | ESP32           | Opmerkingen                         |
+|-----------|----------------|-------------------------------------|
+| M0        | GND            | Normale modus                        |
+| M1        | GND            | Normale modus                        |
+| TX        | RX2             | Pull-up weerstand 4.7kΩ–5.1kΩ        |
+| RX        | TX2             | Pull-up weerstand 4.7kΩ–5.1kΩ        |
+| AUX       | Niet aangesloten| Optioneel voor “busy” status         |
+| VCC       | 3.3 V           | Voeding                              |
+| GND       | GND             | Aarde                                |
 
-### Sources
+## 2. Ontvanger (Raspberry Pi)
 
-### GPIO's
+### Referenties
 
-LoRa E220       → Raspberry Pi  
-VCC             → 3.3 V 
-GND             → GND  
-TX              → Pi UART RX pin (e.g. GPIO 15 or /dev/ttyAMA0)  
-RX              → Pi UART TX pin (e.g. GPIO 14)  
-M0              → GND  
-M1              → GND  
-AUX             → Not connected
+### GPIO
+
+| LoRa E220 | Raspberry Pi                 | Opmerkingen                             |
+|-----------|-----------------------------|-----------------------------------------|
+| VCC       | 3.3 V                        | Voeding                                 |
+| GND       | GND                          | Aarde                                   |
+| TX        | UART RX (GPIO 15 / /dev/ttyAMA0) | Data van LoRa module naar Pi            |
+| RX        | UART TX (GPIO 14)            | Data van Pi naar LoRa module            |
+| M0        | GND                          | Normale modus                            |
+| M1        | GND                          | Normale modus                            |
+| AUX       | Niet aangesloten             | Optioneel voor “busy” status             |
 
 ## Opmerkingen
 
