@@ -1,0 +1,118 @@
+[
+    {
+        "id": "b81ba282af1ab292",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8f5858abcc67f35d",
+        "type": "serial in",
+        "z": "b81ba282af1ab292",
+        "name": "LoRa Input",
+        "serial": "acd30a864361c880",
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "207363e47d7c4287",
+                "d37f028df23312fd"
+            ]
+        ]
+    },
+    {
+        "id": "d37f028df23312fd",
+        "type": "debug",
+        "z": "b81ba282af1ab292",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "207363e47d7c4287",
+        "type": "function",
+        "z": "b81ba282af1ab292",
+        "name": "robust_decoding",
+        "func": "let text;\ntry {\n    text = msg.payload.toString('utf8'); // decode bytes\n} catch (e) {\n    text = JSON.stringify(msg.payload);  // fallback like Python repr()\n}\nmsg.payload = text;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "d37f028df23312fd"
+            ]
+        ]
+    },
+    {
+        "id": "52af4fe3fd4f781b",
+        "type": "inject",
+        "z": "b81ba282af1ab292",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 560,
+        "y": 380,
+        "wires": [
+            [
+                "d37f028df23312fd"
+            ]
+        ]
+    },
+    {
+        "id": "acd30a864361c880",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyAMA0",
+        "serialbaud": "9600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "dd411fe1a74b878e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-serialport": "2.0.3"
+        }
+    }
+]
