@@ -31,7 +31,7 @@
 | RX        | UART TX (GPIO 14)            | Pull-up weerstand 4.7kΩ–5.1kΩ            |
 | M0        | GND                          | Normale modus                            |
 | M1        | GND                          | Normale modus                            |
-| AUX       | Niet aangesloten             | Optioneel voor status             |
+| AUX       | Niet aangesloten             | Optioneel status/ Pull-up weerstand 4.7kΩ–5.1kΩ             |
 
 ## Opmerkingen
 
