@@ -1,9 +1,13 @@
 # PXLDIGITAL_GREEN_PROJECT_RESEARCH
 
+## E220-900T22D
+- [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
+
 ## Zender (ESP32/...)
 
 ### Referentie
-- [Ebyte LoRa E22 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e22-device-for-arduino-esp32-or-esp8266-specs-and-basic-usage-1/)
+- [Ebyte LoRa E220 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
+
 
 ### GPIO
 
