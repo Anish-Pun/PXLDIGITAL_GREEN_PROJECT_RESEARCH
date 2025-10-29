@@ -31,11 +31,11 @@
 |-----------|-----------------------------|-----------------------------------------|
 | VCC       | 3.3 V                        | Voeding                                 |
 | GND       | GND                          | Aarde                                   |
-| TX        | UART RX (GPIO 15 / ) | Pull-up weerstand 4.7kΩ–5.1kΩ            |
+| TX        | UART RX (GPIO 15 ) | Pull-up weerstand 4.7kΩ–5.1kΩ            |
 | RX        | UART TX (GPIO 14)            | Pull-up weerstand 4.7kΩ–5.1kΩ            |
-| M0        | GND                          | Normale modus                            |
-| M1        | GND                          | Normale modus                            |
-| AUX       | Niet aangesloten             | Optioneel status/ Pull-up weerstand 4.7kΩ–5.1kΩ             |
+| M0        | GND  / GPIO 21                        | Normale modus                            |
+| M1        | GND  / GPIO 20                        | Normale modus                            |
+| AUX       | Niet aangesloten / GPIO 18             | Optioneel status/ Pull-up weerstand 4.7kΩ–5.1kΩ             |
 
 ## Opmerkingen
 
