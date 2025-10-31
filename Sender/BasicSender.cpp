@@ -15,17 +15,19 @@
 #include "Arduino.h"
 #define FREQUENCY_868
 #include "LoRa_E220.h"
-#include "esp_system.h"  // for esp_random() to seed RNG
+#include "TinyGPSPlus.h"
  
 // ---------- esp32 pins --------------
 
 LoRa_E220 e22ttl(&Serial2, 18, 21, 19); //  RX AUX M0 M1
+TinyGPSPlus gps;
+HardwareSerial gpsSerial(1); // Use UART1 for GPS
+
 // Note: Wire E220 TX -> ESP32 GPIO16 (RX2), E220 RX -> ESP32 GPIO17 (TX2)
 static constexpr int E220_RX2_PIN = 16; // ESP32 RX2 pin (input from E220 TX)
 static constexpr int E220_TX2_PIN = 17; // ESP32 TX2 pin (output to E220 RX)
-// Hasselt reference location
-static constexpr double BASE_LAT = 50.93069;
-static constexpr double BASE_LON = 5.33749;
+static constexpr int GPS_RX_PIN   = 4;  // ESP32 RX (input from GPS TX)
+static constexpr int GPS_TX_PIN   = 2;  // ESP32 TX (output to GPS RX)
 // Send interval
 static constexpr unsigned long SEND_INTERVAL_MS = 5000; // 5 seconds
 static unsigned long lastSendMs = 0;
@@ -42,6 +44,10 @@ void setup() {
     delay(500);
 
     Serial.println("Starting E220 configuration...");
+
+    // Initialize GPS serial
+    gpsSerial.begin(9600, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
+    Serial.println("GPS serial started");
 
     // Ensure UART2 uses the correct pins to talk to the E220
     Serial2.begin(9600, SERIAL_8N1, E220_RX2_PIN, E220_TX2_PIN);
@@ -79,26 +85,27 @@ void setup() {
     Serial.println(c.status.code);
     printParameters(configuration);
     Serial.println("Hi, I'm going to send message!");
-        Serial.println("Will send fake GPS near Hasselt every 5s.");
- 
-        // Seed RNG for coordinate jitter
-        randomSeed(esp_random());
+    Serial.println("Will send real GPS data every 5s.");
 }
 
 void loop() {
-    // Periodic sender: fake GPS near Hasselt every 5 seconds
+    // Continuously read GPS data
+    while (gpsSerial.available() > 0) {
+        gps.encode(gpsSerial.read());
+    }
+    
     unsigned long now = millis();
     if (now - lastSendMs >= SEND_INTERVAL_MS) {
         lastSendMs = now;
-        // +/- 0.01 degrees (~1.1 km latitude, ~0.7 km longitude at this latitude)
-        double latOffset = (double)random(-1000, 1001) / 100000.0; // -0.01000 .. +0.01000
-        double lonOffset = (double)random(-1000, 1001) / 100000.0;
-        double lat = BASE_LAT + latOffset;
-        double lon = BASE_LON + lonOffset;
+
+        if (gps.location.isValid() && gps.location.age() < 2000) {
+        double lat = gps.location.lat();
+        double lon = gps.location.lng();
+        double alt = gps.altitude.meters();
+        int sats = gps.satellites.value();
 
         char buf[160];
-        // JSON with timestamp
-        snprintf(buf, sizeof(buf), "{\"device\":\"Anish-Sending\",\"lat\":%.6f,\"lon\":%.6f,\"ts\":%lu}", lat, lon, now);
+        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS\",\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":%lu}", lat, lon, alt, sats, now);
 
         String payload = String(buf) + "\n"; // newline-delimited for easy parsing
         ResponseStatus s = e22ttl.sendMessage(payload);
@@ -106,6 +113,11 @@ void loop() {
         Serial.println(buf);
         Serial.print("Result: ");
         Serial.println(s.getResponseDescription());
+        } 
+        else 
+        {
+            Serial.println("Invalid GPS data");
+        }
     }
 
   // If something available
