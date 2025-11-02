@@ -16,6 +16,7 @@
 #define FREQUENCY_868
 #include "LoRa_E220.h"
 #include "TinyGPSPlus.h"
+#include "esp_sleep.h"
  
 // ---------- esp32 pins --------------
 
@@ -84,19 +85,28 @@ void setup() {
     Serial.println(c.status.getResponseDescription());
     Serial.println(c.status.code);
     printParameters(configuration);
+
     Serial.println("Hi, I'm going to send message!");
     Serial.println("Will send real GPS data every 5s.");
 }
 
 void loop() {
     // Continuously read GPS data
+    /*
     while (gpsSerial.available() > 0) {
         gps.encode(gpsSerial.read());
     }
+    */
     
     unsigned long now = millis();
     if (now - lastSendMs >= SEND_INTERVAL_MS) {
         lastSendMs = now;
+
+        // GPS duty cycle: read for max 1s
+        unsigned long start = millis();
+        while (millis() - start < 1000) {
+            while (gpsSerial.available() > 0) gps.encode(gpsSerial.read());
+        }
 
         if (gps.location.isValid() && gps.location.age() < 2000) {
         double lat = gps.location.lat();
@@ -118,6 +128,9 @@ void loop() {
         {
             Serial.println("Invalid GPS data");
         }
+        esp_sleep_enable_timer_wakeup(SEND_INTERVAL_MS * 1000); // microseconds
+        Serial.println("Entering light sleep...");
+        esp_light_sleep_start();
     }
 
   // If something available
