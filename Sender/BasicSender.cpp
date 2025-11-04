@@ -28,7 +28,7 @@ HardwareSerial gpsSerial(1); // Use UART1 for GPS
 static constexpr int E220_RX2_PIN = 16; // ESP32 RX2 pin (input from E220 TX)
 static constexpr int E220_TX2_PIN = 17; // ESP32 TX2 pin (output to E220 RX)
 static constexpr int GPS_RX_PIN   = 4;  // ESP32 RX (input from GPS TX)
-static constexpr int GPS_TX_PIN   = 2;  // ESP32 TX (output to GPS RX)
+static constexpr int GPS_TX_PIN   = 5;  // ESP32 TX (output to GPS RX)
 // Send interval
 static constexpr unsigned long SEND_INTERVAL_MS = 5000; // 5 seconds
 static unsigned long lastSendMs = 0;
