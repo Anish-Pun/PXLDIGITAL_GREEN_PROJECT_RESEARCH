@@ -17,6 +17,8 @@
 #include "LoRa_E220.h"
 #include "TinyGPSPlus.h"
 #include "esp_sleep.h"
+#include <OneWire.h>
+#include <DallasTemperature.h>
  
 // ---------- esp32 pins --------------
 
@@ -29,7 +31,10 @@ static constexpr int E220_RX2_PIN = 16; // ESP32 RX2 pin (input from E220 TX)
 static constexpr int E220_TX2_PIN = 17; // ESP32 TX2 pin (output to E220 RX)
 static constexpr int GPS_RX_PIN   = 4;  // ESP32 RX (input from GPS TX)
 static constexpr int GPS_TX_PIN   = 5;  // ESP32 TX (output to GPS RX)
+static constexpr int oneWireBus = 15;   // GPIO 15 where the DS18B20 is connected
 // Send interval
+OneWire oneWire(oneWireBus);
+DallasTemperature sensors(&oneWire);
 static constexpr unsigned long SEND_INTERVAL_MS = 5000; // 5 seconds
 static unsigned long lastSendMs = 0;
  
@@ -49,6 +54,10 @@ void setup() {
     // Initialize GPS serial
     gpsSerial.begin(9600, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
     Serial.println("GPS serial started");
+
+    // Initialize DS18B20
+    sensors.begin();
+    Serial.println("DS18B20 sensor gestart");
 
     // Ensure UART2 uses the correct pins to talk to the E220
     Serial2.begin(9600, SERIAL_8N1, E220_RX2_PIN, E220_TX2_PIN);
@@ -108,14 +117,22 @@ void loop() {
             while (gpsSerial.available() > 0) gps.encode(gpsSerial.read());
         }
 
+        // Read temperature from DS18B20
+        sensors.requestTemperatures();
+        float tempC = sensors.getTempCByIndex(0);
+        if (tempC == DEVICE_DISCONNECTED_C) {
+            Serial.println("DS18B20 niet verbonden!");
+            tempC = -127.0;
+        }
+
         if (gps.location.isValid() && gps.location.age() < 2000) {
         double lat = gps.location.lat();
         double lon = gps.location.lng();
         double alt = gps.altitude.meters();
         int sats = gps.satellites.value();
 
-        char buf[160];
-        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS\",\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":%lu}", lat, lon, alt, sats, now);
+        char buf[200];
+        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS\",\"lat\":%.6f,\"lon\":%.6f," "\"alt\":%.2f,\"sats\":%d,\"temp\":%.2f,\"ts\":%lu}", lat, lon, alt, sats, tempC, now);
 
         String payload = String(buf) + "\n"; // newline-delimited for easy parsing
         ResponseStatus s = e22ttl.sendMessage(payload);
