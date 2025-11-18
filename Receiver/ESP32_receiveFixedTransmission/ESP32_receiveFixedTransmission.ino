@@ -101,7 +101,7 @@ void setup() {
 
 void loop() {
 	// If something available
-  if (e220ttl.available()>1) {
+  if (e220ttl.available()> 1) {
     Serial.print("Message: ");
 	  // read the String message
     #ifdef ENABLE_RSSI

@@ -13,11 +13,11 @@
 
 | LoRa E220 | ESP32           | Opmerkingen                         |
 |-----------|----------------|-------------------------------------|
-| M0        | 21 / D21        | Normale modus                        |
-| M1        | 19 / D19        | Normale modus                        |
-| TX        | RX2 / D16             | Pull-up weerstand 4.7kΩ–5.1kΩ        |
-| RX        | TX2 / D17            | Pull-up weerstand 4.7kΩ–5.1kΩ        |
-| AUX       | AUX             | Pull-up weerstand 4.7kΩ–5.1kΩ         |
+| M0        | 21 / D21        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
+| M1        | 19 / D19        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
+| TX        | RX2 / D16             | Communicatie UART       |
+| RX        | TX2 / D17            | Communicatie  UART       |
+| AUX       | AUX             | Busy status E220         |
 | VCC       | 3.3 V           | Voeding                              |
 | GND       | GND             | Aarde                                |
 
@@ -28,18 +28,18 @@
 ### GPIO
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
-|-----------|-----------------------------|-----------------------------------------|
+|-----------|------------------------------|-----------------------------------------|
 | VCC       | 3.3 V                        | Voeding                                 |
 | GND       | GND                          | Aarde                                   |
-| TX        | UART RX (GPIO 15 ) | Pull-up weerstand 4.7kΩ–5.1kΩ            |
-| RX        | UART TX (GPIO 14)            | Pull-up weerstand 4.7kΩ–5.1kΩ            |
-| M0        | GND  / GPIO 21                        | Normale modus                            |
-| M1        | GND  / GPIO 20                        | Normale modus                            |
-| AUX       | Niet aangesloten / GPIO 18             | Optioneel status/ Pull-up weerstand 4.7kΩ–5.1kΩ             |
+| TX        | UART RX (GPIO 15 )           | Communicatie UART           |
+| RX        | UART TX (GPIO 14)            | Communicatie UART           |
+| M0        | GND  / GPIO 21               | Normale modus (GND) /  Configuratie modus (+3.3V)                           |
+| M1        | GND  / GPIO 20               | Normale modus (GND) /  Configuratie modus (+3.3V)                         |
+| AUX       | GPIO 18                      | Busy status E220            |
 
 ## Opmerkingen
 
 1. UART-baudrate is zowel zender als ontvanger 9600 bps.  
-2. Pull-up weerstanden (4.7kΩ–5.1kΩ) op de TX/RX/AUX lijnen verbeteren de signaalstabiliteit.  
+2. Pull-up weerstanden (4.7kΩ–5.1kΩ) op de TX/RX/AUX lijnen verbeteren de signaalstabiliteit. (optioneel)
 3. Als M0 = GND, M1 = GND => Beide modules werken in **Normale modus** voor peer-to-peer communicatie.  
 4. De AUX pin kan optioneel worden aangesloten op een GPIO om de status van de module te monitoren.
