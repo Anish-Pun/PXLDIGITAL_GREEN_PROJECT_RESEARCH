@@ -19,7 +19,7 @@
 | TX        | RX2 / D16       | Communicatie UART       |
 | RX        | TX2 / D17       | Communicatie  UART       |
 | AUX       | AUX             | Busy status E220         |
-| VCC       | 3.3 V           | Voeding                              |
+| VCC       | 3.3 V - 5 V     | Voeding                              |
 | GND       | GND             | Aarde                                |
 
 #### extra benodigheid:
@@ -79,14 +79,14 @@ Wij hebben deze website geraadpleegd om de code te maken:
 ### GPIO
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
-|-----------|------------------------------|-----------------------------------------|
-| VCC       | 3.3 V                        | Voeding                                 |
-| GND       | GND                          | Aarde                                   |
-| TX        | UART RX (GPIO 15 )           | Communicatie UART           |
-| RX        | UART TX (GPIO 14)            | Communicatie UART           |
+|-----------|------------------------------|----------------------------------------|
+| VCC       | 3.3 V - 5 V                  | Voeding                                |
+| GND       | GND                          | Aarde                                  |
+| TX        | UART RX (GPIO 15 )           | Communicatie UART                      |
+| RX        | UART TX (GPIO 14)            | Communicatie UART                      |
 | M0        | GND  / GPIO 21               | Normale modus (GND) /  Configuratie modus (+3.3V)                           |
 | M1        | GND  / GPIO 20               | Normale modus (GND) /  Configuratie modus (+3.3V)                         |
-| AUX       | GPIO 18                      | Busy status E220            |
+| AUX       | GPIO 18                      | Busy status E220                       |
 
 ## Opmerkingen
 
