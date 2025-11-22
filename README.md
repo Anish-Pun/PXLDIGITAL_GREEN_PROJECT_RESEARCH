@@ -66,7 +66,7 @@
 
 ### schematic design - breadbord
 
-![transciever schematic](/afbeeldingen/Tranciever_schematic.jpg)    
+![transciever schematic](/Afbeeldingen/Tranciever_schematic.jpg)    
 
 ### bronVermelding: 
 Wij hebben deze website geraadpleegd om de code te maken:
