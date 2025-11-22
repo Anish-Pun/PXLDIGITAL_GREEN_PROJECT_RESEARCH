@@ -5,7 +5,7 @@
 
 | LoRa E220     | Opmerkingen                         |
 |---------------|-------------------------------------|
-| Baud Rate     | 9600                                |
+| Baud Rate     | 9600 bps                            |
 | Communicatie  | UART (TX/RX)                        |
 | Configuratie  | M0, M1: 3.3V / HIGH                 |
 | Transmission  | M0, M1: GND / LOW                   |
