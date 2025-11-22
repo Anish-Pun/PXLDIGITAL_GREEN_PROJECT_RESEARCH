@@ -13,11 +13,11 @@
 ### GPIO -- Long range signal -- LoRa E220
 
 | LoRa E220 | ESP32           | Opmerkingen                         |
-|-----------|----------------|-------------------------------------|
+|-----------|-----------------|-------------------------------------|
 | M0        | 21 / D21        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
 | M1        | 19 / D19        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
-| TX        | RX2 / D16             | Communicatie UART       |
-| RX        | TX2 / D17            | Communicatie  UART       |
+| TX        | RX2 / D16       | Communicatie UART       |
+| RX        | TX2 / D17       | Communicatie  UART       |
 | AUX       | AUX             | Busy status E220         |
 | VCC       | 3.3 V           | Voeding                              |
 | GND       | GND             | Aarde                                |
@@ -45,7 +45,7 @@
 | NEO-6M | ESP32           | Opmerkingen                         |
 |-----------|----------------|-------------------------------------|
 | RX        | D15             | Communicatie  UART       |
-| TX        | D4              | Busy status E220         |
+| TX        | D4              | Communicatie  UART         |
 | VCC       | 3.3 V           | Voeding                  |
 | GND       | GND             | Aarde                    |
 
@@ -56,9 +56,9 @@
 
 | DS18B20 | ESP32           | Opmerkingen                         |
 |-----------|----------------|-------------------------------------|
-| VCC       | 3.3 V          | Normale modus (GND) /  Configuratie modus (+3.3V)      |
-| DQ        | 23/ D23        | Normale modus (GND) /  Configuratie modus (+3.3V)      |
-| GND       | GND            | Communicatie UART                                      |
+| VCC       | 3.3 V          | Voeding      |
+| DQ        | 23 / D23       |       |
+| GND       | GND            | Aarde                                      |
 
 #### bevindingen:
 - Om de temperatuur sensor te verbinden moet je een weerstand van ongeveer 4.7K ohm, als dit niet het geval is zal de temperatuur sensor foute lezingen geven. De mogelijke lezing gaat waarschrijnlijk rond de -125°. 
