@@ -3,6 +3,16 @@
 ## E220-900T22D
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
+| LoRa E220     | Opmerkingen                         |
+|---------------|-------------------------------------|
+| Baud Rate     | 9600                                |
+| Communicatie  | UART (TX/RX)                        |
+| Configuratie  | M0, M1: 3.3V / HIGH                 |
+| Transmission  | M0, M1: GND / LOW                   |
+| Busy status   | AUX: HIGH = Available, LOW = Busy   |
+| VCC           | 3.3 V - 5 V                         |
+| GND           | GND                                 |
+
 ## Zender (ESP32/...)
 
 ### Referentie componenten
