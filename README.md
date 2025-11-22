@@ -66,7 +66,7 @@
 
 ### schematic design - breadbord
 
-![transciever scemtaic](./afbeeldingen/Tranciever_schematic.jpg)    
+![transciever schemtatic](./afbeeldingen/Tranciever_schematic.jpg)    
 
 ### bronVermelding: 
 Wij hebben deze website geraadpleegd om de code te maken:
@@ -87,6 +87,7 @@ Wij hebben deze website geraadpleegd om de code te maken:
 | M0        | GND  / GPIO 21               | Normale modus (GND) /  Configuratie modus (+3.3V)                           |
 | M1        | GND  / GPIO 20               | Normale modus (GND) /  Configuratie modus (+3.3V)                         |
 | AUX       | GPIO 18                      | Busy status E220                       |
+![GPIO Raspberry Pi](/GPIO's/Raspberry-Pi-5-Pinout--189012982.jpg)    
 
 ## Opmerkingen
 
