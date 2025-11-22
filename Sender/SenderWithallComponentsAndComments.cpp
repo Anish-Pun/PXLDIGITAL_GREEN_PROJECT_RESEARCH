@@ -28,6 +28,12 @@
 #include "esp_sleep.h"          // ESP sleep modes header
 #include <OneWire.h>            // temperatuur header
 #include <DallasTemperature.h>  // temperatuur header
+
+// ---------- LDR pins ----------------
+
+const int ldrPin = 34;      //ADC pin voor LDR
+const int LED = 25;         //GPIO pin voor LED
+const int threshold = 200; //drempelwaarde LDR led aan/uit
  
 // ---------- esp32 pins --------------
 
@@ -115,6 +121,8 @@ void setup() {
 
     Serial.println("Hi, I'm going to send message!");                                   // module klaar maken om dingen te vezenden
     Serial.println("Will send real GPS data every 5s.");
+
+    pinMode(LED, OUTPUT);
 }
 
 void loop() {
@@ -123,6 +131,16 @@ void loop() {
 
     if (now - lastSendMs >= SEND_INTERVAL_MS) {                                         // If functie die checkt als de interval tijd  is verstreken
         lastSendMs = now;
+
+        // Lees LDR & stuur LED aan
+        int ldrValue = analogRead(ldrPin);
+        bool zonOp = (ldrValue > threshold);
+
+        if (zonOp){
+            digitalWrite(LED, LOW); // Nachtlamp uit bij daglicht
+        } else {
+            digitalWrite(LED, HIGH); // Nachtlamp aan bij duisternis
+        }
 
         // GPS duty cycle: read for max 1s
         unsigned long start = millis();                                                // variable die ervoor zorgt dat er iedere seconde wordt gecheckt als gps data gevonden wordt op niet 
@@ -136,8 +154,12 @@ void loop() {
         double alt = gps.altitude.meters();                                     // altitude in meters 
         int sats = gps.satellites.value();                                      // hoeveel heden gevonden satelieten
 
-        char buf[160];
-        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS_Maxime\",\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":%lu}", lat, lon, alt, sats, now); // printe message met de gps data 
+        sensors.requestTemperatures();
+        float temparatureC = sensors.getTempCByIndex(0);
+
+        const char* lightStr = zonOp ? "Het is licht buiten, nachtlamp staat uit" : "Het is donker buiten, nachtlamp staat aan";
+        char buf[256];
+        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS_Maxime\",\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":%lu,\"temp\":%.2f,\"light\":\"%s\"}", lat, lon, alt, sats, now, temparatureC ,lightStr); // printe message met de gps data 
 
         String payload = String(buf) + "\n";                    // newline-delimited for easy parsing
         ResponseStatus s = e22ttl.sendMessage(payload);         // variable aan maken van de sting buffer van de gps data
@@ -202,7 +224,7 @@ void printParameters(struct Configuration configuration) {
     Serial.println("----------------------------------------");
 }
 void printGetTemps(){
-   sensors.requestTemperatures(); 
+    sensors.requestTemperatures(); 
   float temperatureC = sensors.getTempCByIndex(0);
   float temperatureF = sensors.getTempFByIndex(0);
   Serial.print(temperatureC);
