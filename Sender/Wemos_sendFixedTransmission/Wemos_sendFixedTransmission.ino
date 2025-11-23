@@ -103,14 +103,14 @@ void setup() {
 	Serial.print("Hi, I'm going to send message!: ");
 
 	// Send message
-	ResponseStatus rs1 = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 23, "Hello, world?");
+	ResponseStatus rs1 = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, "Hello, world?");
 	Serial.println(rs1.getResponseDescription());
 }
 static unsigned long lastSend = 0;
 void loop() {
   if (Serial.available()) {
 		String input = Serial.readString();
-		ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 23, input);
+		ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, input);
 		// Check If there is some problem of succesfully send
 		Serial.print(rs.getResponseDescription());
     Serial.print(": ");
@@ -118,7 +118,7 @@ void loop() {
   }
   if (millis() - lastSend > 5000) {  // send every 5s
     lastSend = millis();
-    ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 23, "Loop test!");
+    ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, "Loop test!");
     Serial.println(rs.getResponseDescription());
   }
 }
