@@ -118,7 +118,8 @@ void loop() {
   }
   if (millis() - lastSend > 5000) {  // send every 5s
     lastSend = millis();
-    ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, "Loop test!");
+    String msg = String(millis()/1000);
+    ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, msg);
     Serial.println(rs.getResponseDescription());
   }
 }
