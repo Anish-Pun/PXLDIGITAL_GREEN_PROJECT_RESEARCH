@@ -63,7 +63,7 @@ void setup() {
   configuration.ADDL = 0x02;
 	configuration.ADDH = 0x00;
 
-	configuration.CHAN = 23;
+	configuration.CHAN = 0x12;
 
 	configuration.SPED.uartBaudRate = UART_BPS_9600;
 	configuration.SPED.airDataRate = AIR_DATA_RATE_010_24;
@@ -95,7 +95,7 @@ void setup() {
 	Serial.println("Hi, I'm going to send message!");
 
 	// Send message
-	ResponseStatus rs1 = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 23, "Hello, world?");
+	ResponseStatus rs1 = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, "Hello, world?");
 	Serial.println(rs1.getResponseDescription());
 }
 
@@ -120,6 +120,14 @@ void loop() {
         Serial.print("RSSI: "); Serial.println(rc.rssi, DEC);
     #endif
 	}
+  }
+  if (Serial.available()) {
+		String input = Serial.readString();
+		ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, input);
+		// Check If there is some problem of succesfully send
+		Serial.print(rs.getResponseDescription());
+    Serial.print(": ");
+    Serial.println(input);
   }
 }
 
