@@ -113,6 +113,15 @@ Wij hebben deze website geraadpleegd om de code te maken:
 
 Code: Receiver/reset_config_pi5/config+reset.py
 
+### Controle UART (pi 5)
+
+```
+cat /boot/firmware/config.txt => 
+```
+Verwacht resultaat:
+[all]
+dtparam=uart0=on
+
 
 ## Opmerkingen
 
