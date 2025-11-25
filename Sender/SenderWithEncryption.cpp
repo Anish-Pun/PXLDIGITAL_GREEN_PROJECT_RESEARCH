@@ -16,9 +16,14 @@
 #define FREQUENCY_868
 #include "LoRa_E220.h"
 #include "TinyGPSPlus.h"
+#include "AESLib.h"
 #include "esp_sleep.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
+
+#define NODE_ID 1 // Unique node ID
+
+// AES key for this node (16 bytes)
+byte aes_key[16] = {0x89,0x04,0x47,0xad,0x1b,0xd4,0xf9,0x20,0x03,0xc3,0x56,0x0a,0x86,0x09,0xac,0xf6}; //Temporary key for testing 
+byte aes_iv[16];  // IV is random for each message
  
 // ---------- esp32 pins --------------
 
@@ -30,19 +35,21 @@ HardwareSerial gpsSerial(1); // Use UART1 for GPS
 static constexpr int E220_RX2_PIN = 16; // ESP32 RX2 pin (input from E220 TX)
 static constexpr int E220_TX2_PIN = 17; // ESP32 TX2 pin (output to E220 RX)
 static constexpr int GPS_RX_PIN   = 4;  // ESP32 RX (input from GPS TX)
-static constexpr int GPS_TX_PIN   = 5;  // ESP32 TX (output to GPS RX)
-static constexpr int oneWireBus = 15;   // GPIO 15 where the DS18B20 is connected
+static constexpr int GPS_TX_PIN   = 2;  // ESP32 TX (output to GPS RX)
+
 // Send interval
-OneWire oneWire(oneWireBus);
-DallasTemperature sensors(&oneWire);
-static constexpr unsigned long SEND_INTERVAL_MS = 5000; // 5 seconds
+static constexpr unsigned long SEND_INTERVAL_MS = 60000; // 60 seconds
 static unsigned long lastSendMs = 0;
  
+// AES encryption
+AESLib aes;
+
 //LoRa_E22 e22ttl(&Serial2, 22, 4, 18, 21, 19, UART_BPS_RATE_9600); //  esp32 RX <-- e22 TX, esp32 TX --> e22 RX AUX M0 M1
 // -------------------------------------
  
 void printParameters(struct Configuration configuration);
 void printModuleInformation(struct ModuleInformation moduleInformation);
+void generateRandomIV(byte *iv);
 
 void setup() {
     Serial.begin(9600);
@@ -54,10 +61,6 @@ void setup() {
     // Initialize GPS serial
     gpsSerial.begin(9600, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
     Serial.println("GPS serial started");
-
-    // Initialize DS18B20
-    sensors.begin();
-    Serial.println("DS18B20 sensor gestart");
 
     // Ensure UART2 uses the correct pins to talk to the E220
     Serial2.begin(9600, SERIAL_8N1, E220_RX2_PIN, E220_TX2_PIN);
@@ -95,76 +98,103 @@ void setup() {
     Serial.println(c.status.code);
     printParameters(configuration);
 
-    Serial.println("Hi, I'm going to send message!");
-    Serial.println("Will send real GPS data every 5s.");
+    Serial.println("Node ready! Sending GPS data every 60s...");
 }
 
 void loop() {
-    // Continuously read GPS data
-    /*
-    while (gpsSerial.available() > 0) {
-        gps.encode(gpsSerial.read());
+  // Continuously read GPS data
+  /*
+  while (gpsSerial.available() > 0) {
+      gps.encode(gpsSerial.read());
+  }
+  */
+
+  unsigned long now = millis();
+  if (now - lastSendMs >= SEND_INTERVAL_MS) {
+    lastSendMs = now;
+
+    // GPS duty cycle: read for max 1s
+    unsigned long start = millis();
+    while (millis() - start < 1000) {
+      while (gpsSerial.available() > 0) gps.encode(gpsSerial.read());
     }
-    */
-    
-    unsigned long now = millis();
-    if (now - lastSendMs >= SEND_INTERVAL_MS) {
-        lastSendMs = now;
 
-        // GPS duty cycle: read for max 1s
-        unsigned long start = millis();
-        while (millis() - start < 1000) {
-            while (gpsSerial.available() > 0) gps.encode(gpsSerial.read());
-        }
+    // Prepare payload
+    String payload;
+    char buf[256];
 
-        // Read temperature from DS18B20
-        sensors.requestTemperatures();
-        float tempC = sensors.getTempCByIndex(0);
-        if (tempC == DEVICE_DISCONNECTED_C) {
-            Serial.println("DS18B20 niet verbonden!");
-            tempC = -127.0;
-        }
+    if (gps.location.isValid() && gps.date.isValid() && gps.time.isValid()) {
+      char timestr[20];
+      snprintf(timestr, sizeof(timestr), "%04d%02d%02d%02d%02d%02d", gps.date.year(), gps.date.month(), gps.date.day(), gps.time.hour(), gps.time.minute(), gps.time.second());
 
-        if (gps.location.isValid() && gps.location.age() < 2000) {
-        double lat = gps.location.lat();
-        double lon = gps.location.lng();
-        double alt = gps.altitude.meters();
-        int sats = gps.satellites.value();
-
-        char buf[200];
-        snprintf(buf, sizeof(buf), "{\"device\":\"ESP32-GPS\",\"lat\":%.6f,\"lon\":%.6f," "\"alt\":%.2f,\"sats\":%d,\"temp\":%.2f,\"ts\":%lu}", lat, lon, alt, sats, tempC, now);
-
-        String payload = String(buf) + "\n"; // newline-delimited for easy parsing
-        ResponseStatus s = e22ttl.sendMessage(payload);
-        Serial.print("Send: ");
-        Serial.println(buf);
-        Serial.print("Result: ");
-        Serial.println(s.getResponseDescription());
-        } 
-        else 
-        {
-            Serial.println("Invalid GPS data");
-        }
-        esp_sleep_enable_timer_wakeup(SEND_INTERVAL_MS * 1000); // microseconds
-        Serial.println("Entering light sleep...");
-        esp_light_sleep_start();
+      snprintf(buf, sizeof(buf), "{\"node_id\":%d,\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":%s}", NODE_ID, gps.location.lat(), gps.location.lng(), gps.altitude.meters(), gps.satellites.value(), timestr);
+    } else if (gps.location.isValid()) {
+      snprintf(buf, sizeof(buf), "{\"node_id\":%d,\"lat\":%.6f,\"lon\":%.6f,\"alt\":%.2f,\"sats\":%d,\"ts\":null}", NODE_ID, gps.location.lat(), gps.location.lng(), gps.altitude.meters(), gps.satellites.value());
+    } else {
+      snprintf(buf, sizeof(buf), "{\"node_id\":%d,\"status\":\"no_gps\",\"ts\":null}", NODE_ID);
     }
+
+    payload = String(buf);
+
+    // Encrypt payload
+    byte payload_bytes[256];
+    memcpy(payload_bytes, payload.c_str(), payload.length());
+    generateRandomIV(aes_iv);
+
+    byte encrypted[256];
+    uint16_t enc_len = aes.encrypt(payload_bytes, payload.length(), encrypted, aes_key, 128, aes_iv);
+
+    // Combine IV + ciphertext
+    byte packet[272];
+    memcpy(packet, aes_iv, 16);
+    memcpy(packet + 16, encrypted, enc_len);
+    uint16_t packet_len = 16 + enc_len;
+
+    //DEBUG: print encrypted bytes
+    Serial.print("IV (hex): ");
+    for (int i = 0; i < 16; i++) {
+      if (aes_iv[i] < 0x10) Serial.print('0');
+      Serial.print(aes_iv[i], HEX);
+      Serial.print(' ');
+    }
+    Serial.println();
+
+    Serial.print("Encrypted bytes (hex): ");
+    for (int i = 0; i < enc_len; ++i) {
+      if (encrypted[i] < 0x10) Serial.print('0');
+      Serial.print(encrypted[i], HEX);
+      Serial.print(' ');
+    }
+    Serial.println();
+
+    ResponseStatus s = e22ttl.sendMessage((char * ) packet);
+    //ResponseStatus s = e22ttl.sendFixedMessage(0x00, 0xFF, 0x12, (char * ) packet, packet_len);
+
+    Serial.print("Send: ");
+    Serial.println(payload);
+    Serial.print("Result: ");
+    Serial.println(s.getResponseDescription());
+
+    esp_sleep_enable_timer_wakeup(SEND_INTERVAL_MS * 1000); // microseconds
+    Serial.println("Entering light sleep...");
+    esp_light_sleep_start();
+  }
 
   // If something available
-  if (e22ttl.available()>1) {
-      // read the String message
+  if (e22ttl.available() > 1) {
+    // read the String message
     ResponseContainer rc = e22ttl.receiveMessage();
     // Is something goes wrong print error
-    if (rc.status.code!=1){
-        rc.status.getResponseDescription();
-    }else{
-        // Print the data received
-        Serial.println(rc.data);
+    if (rc.status.code != 1) {
+      rc.status.getResponseDescription();
+    } else {
+      // Print the data received
+      Serial.println(rc.data);
     }
   }
   if (Serial.available()) {
-      String input = Serial.readString();
-      e22ttl.sendMessage(input);
+    String input = Serial.readString();
+    e22ttl.sendMessage(input);
   }
 }
 
@@ -203,4 +233,8 @@ void printModuleInformation(struct ModuleInformation moduleInformation) {
     Serial.print(F("Features : "));  Serial.println(moduleInformation.features, HEX);
     Serial.println("----------------------------------------");
  
+}
+
+void generateRandomIV(byte *iv) {
+  for (int i = 0; i < 16; i++) iv[i] = (byte)esp_random();
 }

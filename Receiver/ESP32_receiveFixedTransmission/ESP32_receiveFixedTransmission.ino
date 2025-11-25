@@ -41,7 +41,7 @@
 #include "LoRa_E220.h"
 
 // ---------- esp32 pins --------------
-LoRa_E220 e220ttl(&Serial2, 18, 21, 19); //  RX AUX M0 M1
+LoRa_E220 e220ttl(&Serial2, 23, 21, 19); //  RX AUX M0 M1
 
 void printParameters(struct Configuration configuration);
 
@@ -101,8 +101,8 @@ void setup() {
 
 void loop() {
 	// If something available
-  if (e220ttl.available()>1) {
-    Serial.println("Message received!");
+  if (e220ttl.available()> 1) {
+    Serial.print("Message: ");
 	  // read the String message
     #ifdef ENABLE_RSSI
       ResponseContainer rc = e220ttl.receiveMessageRSSI();
@@ -114,18 +114,12 @@ void loop() {
         Serial.println(rc.status.getResponseDescription());
       }else{
         // Print the data received
-        Serial.println(rc.status.getResponseDescription());
+        //Serial.println(rc.status.getResponseDescription());
         Serial.println(rc.data);
     #ifdef ENABLE_RSSI
         Serial.print("RSSI: "); Serial.println(rc.rssi, DEC);
     #endif
 	}
-  }
-  if (Serial.available()) {
-		String input = Serial.readString();
-		ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 23, input);
-		// Check If there is some problem of succesfully send
-		Serial.println(rs.getResponseDescription());
   }
 }
 
