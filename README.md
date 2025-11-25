@@ -5,6 +5,20 @@
 ### E220-900T22D
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
+<<<<<<< HEAD
+=======
+| LoRa E220     | Opmerkingen                         |
+|---------------|-------------------------------------|
+| Baud Rate     | 9600 bps                            |
+| Communicatie  | UART (TX/RX)                        |
+| Configuratie  | M0, M1: 3.3V / HIGH                 |
+| Transmission  | M0, M1: GND / LOW                   |
+| Busy status   | AUX: HIGH = Available, LOW = Busy   |
+| VCC           | 3.3 V - 5 V                         |
+| GND           | GND                                 |
+
+## Zender (ESP32/...)
+>>>>>>> f8b0594cbff2ccad2690bd2a70b5c63e67947b73
 
 
 #### Referentie componenten
@@ -15,13 +29,13 @@
 ### GPIO -- Long range signal -- LoRa E220
 
 | LoRa E220 | ESP32           | Opmerkingen                         |
-|-----------|----------------|-------------------------------------|
+|-----------|-----------------|-------------------------------------|
 | M0        | 21 / D21        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
 | M1        | 19 / D19        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
-| TX        | RX2 / D16             | Communicatie UART       |
-| RX        | TX2 / D17            | Communicatie  UART       |
+| TX        | RX2 / D16       | Communicatie UART       |
+| RX        | TX2 / D17       | Communicatie  UART       |
 | AUX       | AUX             | Busy status E220         |
-| VCC       | 3.3 V           | Voeding                              |
+| VCC       | 3.3 V - 5 V     | Voeding                              |
 | GND       | GND             | Aarde                                |
 
 #### extra benodigheid:
@@ -149,7 +163,7 @@ void printParameters(struct Configuration configuration) {
 | NEO-6M | ESP32           | Opmerkingen                         |
 |-----------|----------------|-------------------------------------|
 | RX        | D15             | Communicatie  UART       |
-| TX        | D4              | Busy status E220         |
+| TX        | D4              | Communicatie  UART         |
 | VCC       | 3.3 V           | Voeding                  |
 | GND       | GND             | Aarde                    |
 
@@ -160,9 +174,9 @@ void printParameters(struct Configuration configuration) {
 
 | DS18B20 | ESP32           | Opmerkingen                         |
 |-----------|----------------|-------------------------------------|
-| VCC       | 3.3 V          | Normale modus (GND) /  Configuratie modus (+3.3V)      |
-| DQ        | 23/ D23        | Normale modus (GND) /  Configuratie modus (+3.3V)      |
-| GND       | GND            | Communicatie UART                                      |
+| VCC       | 3.3 V          | Voeding      |
+| DQ        | 23 / D23       |       |
+| GND       | GND            | Aarde                                      |
 
 #### bevindingen:
 - Om de temperatuur sensor te verbinden moet je een weerstand van ongeveer 4.7K ohm, als dit niet het geval is zal de temperatuur sensor foute lezingen geven. De mogelijke lezing gaat waarschrijnlijk rond de -125°. 
@@ -170,7 +184,7 @@ void printParameters(struct Configuration configuration) {
 
 ### schematic design - breadbord
 
-![transciever scemtaic](./afbeeldingen/Tranciever_schematic.jpg)    
+![transciever schematic](/Afbeeldingen/Tranciever_schematic.jpg)    
 
 ### bronVermelding: 
 Wij hebben deze website geraadpleegd om de code te maken:
@@ -183,14 +197,39 @@ Wij hebben deze website geraadpleegd om de code te maken:
 ### GPIO
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
-|-----------|------------------------------|-----------------------------------------|
-| VCC       | 3.3 V                        | Voeding                                 |
-| GND       | GND                          | Aarde                                   |
-| TX        | UART RX (GPIO 15 )           | Communicatie UART           |
-| RX        | UART TX (GPIO 14)            | Communicatie UART           |
+|-----------|------------------------------|----------------------------------------|
+| VCC       | 3.3 V - 5 V                  | Voeding                                |
+| GND       | GND                          | Aarde                                  |
+| TX        | UART RX (GPIO 15 )           | Communicatie UART                      |
+| RX        | UART TX (GPIO 14)            | Communicatie UART                      |
 | M0        | GND  / GPIO 21               | Normale modus (GND) /  Configuratie modus (+3.3V)                           |
 | M1        | GND  / GPIO 20               | Normale modus (GND) /  Configuratie modus (+3.3V)                         |
-| AUX       | GPIO 18                      | Busy status E220            |
+| AUX       | GPIO 18                      | Busy status E220                       |
+
+![GPIO Raspberry Pi](/GPIO's/Raspberry-Pi-5-Pinout--189012982.jpg)    
+
+### Configuratie E220
+
+1. M0 & M1 : 3.3 V / HIGH				      ( Configuration / Sleep mode )
+2. Wacht tot AUX uitgang = HIGH 			( E220 niet bezig )
+3. Verzend @-command					( UART )
+4. Wacht tot AUX = HIGH 			
+5. Lees alles wat E220 beantwoordt		( UART )
+6. Stap 3 OF exit config M0 & M1 : GND	( Transmission mode )
+7. Wacht tot AUX = HIGH
+8. Ontvang / Verzend LoRa berichten …
+
+Code: Receiver/reset_config_pi5/config+reset.py
+
+### Controle UART (pi 5)
+
+```
+cat /boot/firmware/config.txt
+```
+Verwacht resultaat:
+[all]
+dtparam=uart0=on
+
 
 ## Opmerkingen
 
