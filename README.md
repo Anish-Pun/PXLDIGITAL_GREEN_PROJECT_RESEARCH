@@ -5,8 +5,6 @@
 ### E220-900T22D
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
-<<<<<<< HEAD
-=======
 | LoRa E220     | Opmerkingen                         |
 |---------------|-------------------------------------|
 | Baud Rate     | 9600 bps                            |
@@ -18,8 +16,6 @@
 | GND           | GND                                 |
 
 ## Zender (ESP32/...)
->>>>>>> f8b0594cbff2ccad2690bd2a70b5c63e67947b73
-
 
 #### Referentie componenten
 - [Ebyte LoRa E220 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
