@@ -3,21 +3,7 @@
  * Send a string message to a fixed point ADDH ADDL CHAN
  *
  * You must configure 2 device: one as SENDER (with FIXED SENDER config) and uncomment the relative
- * define with the correct DESTINATION_ADDL, and one as RECEIVER (with FIXED RECEIVER config)
- * and uncomment the relative define with the correct DESTINATION_ADDL.
- *
- * Write a string on serial monitor or reset to resend default value.
- *
- * Pay attention e220 support RSSI, if you want use that functionality you must enable RSSI on configuration
- * configuration.TRANSMISSION_MODE.enableRSSI = RSSI_ENABLED;
- *
- * and uncomment #define ENABLE_RSSI true in this sketch
- *
- * You must uncommend the correct constructor.
- *
- * by Renzo Mischianti <https://www.mischianti.org>
- *
- * https://www.mischianti.org
+ * define with the correct DESTINATION_ADDL, and one as RECEIVER (with FIXED RECEIVER config).
  *
  * E220		  ----- WeMos D1 mini	----- esp32			----- Arduino Nano 33 IoT	----- Arduino MKR	----- Raspberry Pi Pico   ----- stm32               ----- ArduinoUNO
  * M0         ----- D7 (or GND) 	----- 19 (or GND) 	----- 4 (or GND) 			----- 2 (or GND) 	----- 10 (or GND)	      ----- PB0 (or GND)        ----- 7 Volt div (or GND)
@@ -34,21 +20,20 @@
 #define FREQUENCY_868
 #define DESTINATION_ADDL 2
 
-// If you want use RSSI uncomment //#define ENABLE_RSSI true and use relative configuration with RSSI enabled
+// If you want use RSSI uncomment & use relative configuration with RSSI enabled
 //#define ENABLE_RSSI true
 
 #include "Arduino.h"
 #include "LoRa_E220.h"
 #include <SoftwareSerial.h>
 
-// -------- New safe pins --------
-#define PIN_RX D1 //D2  // Connect to E220 TX
-#define PIN_TX D2  // Connect to E220 RX
+// -------- Wemos pins --------
+#define PIN_RX D1       // Connect to E220 TX
+#define PIN_TX D2       // Connect to E220 RX
 #define PIN_AUX D5
 #define PIN_M0  D7
 #define PIN_M1  D6
 
-// ---------- Wemos pins --------------
 SoftwareSerial e220Serial(PIN_RX, PIN_TX); // RX D3,TX D4
 LoRa_E220 e220ttl(&e220Serial, PIN_AUX, PIN_M0, PIN_M1);
 
@@ -59,12 +44,13 @@ void setup() {
 	delay(500);
   e220Serial.begin(9600);
 
-	// Startup all pins and UART
+	// Startup all pins & UART
 	e220ttl.begin();
 
 	ResponseStructContainer c;
 	c = e220ttl.getConfiguration();
-	// It's important get configuration pointer before all other operation
+
+	// It's important get configuration before all other operation
 	Configuration configuration = *(Configuration*) c.data;
 	Serial.println(c.status.getResponseDescription());
 	Serial.println(c.status.code);
@@ -92,7 +78,6 @@ void setup() {
 	Serial.println(rs.code);
 
 	c = e220ttl.getConfiguration();
-	// It's important get configuration pointer before all other operation
 	configuration = *(Configuration*) c.data;
 	Serial.println(c.status.getResponseDescription());
 	Serial.println(c.status.code);
@@ -102,7 +87,7 @@ void setup() {
 
 	Serial.print("Hi, I'm going to send message!: ");
 
-	// Send message
+	// Send test message
 	ResponseStatus rs1 = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, "Hello, world?");
 	Serial.println(rs1.getResponseDescription());
 }
@@ -111,7 +96,7 @@ void loop() {
   if (Serial.available()) {
 		String input = Serial.readString();
 		ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, input);
-		// Check If there is some problem of succesfully send
+		// Check if unsuccesfully send
 		Serial.print(rs.getResponseDescription());
     Serial.print(": ");
     Serial.println(input);
