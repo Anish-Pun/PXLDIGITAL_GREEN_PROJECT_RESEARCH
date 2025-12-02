@@ -1,0 +1,27 @@
+install nodered:
+bash <(curl -sL https://github.com/node-red/linux-installers/releases/latest/download/update-nodejs-and-nodered-deb)
+
+control centre: Interfaces: enable I2C & Serial port, disable console
+
+ssh:
+ssh-keygen -f C:\Users\x\.ssh\known_hosts -R hostname;
+
+# script autostart nodered:
+sudo systemctl stop nodered.service;
+sudo systemctl start nodered.service;
+sleep 5;
+chromium --kiosk --password-store=basic "http://127.0.0.1:1880/dashboard"; # password stor for keychain ask
+
+
+Create a .desktop file: ~/.config/autostart/red.desktop:
+[Desktop Entry]
+Type=Application
+Name=Node-RED Autostart
+Exec=/home/milan/nodered_autostart.sh
+X-GNOME-Autostart-enabled=true"http://127.0.0.1:1880";
+
+chmod +x red.desktop;
+sudo reboot;
+
+
+
