@@ -184,7 +184,7 @@ void printParameters(struct Configuration configuration) {
 
 ### schematic design - breadbord
 
-![transciever schematic](/Afbeeldingen/Tranciever_schematic.jpg)    
+![transciever schematic](/Afbeeldingen/LDRadded.jpg)    
 
 ### bronVermelding: 
 Wij hebben deze website geraadpleegd om de code te maken:
