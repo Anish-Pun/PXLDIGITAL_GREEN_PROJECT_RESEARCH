@@ -1,6 +1,8 @@
 # PXLDIGITAL_GREEN_PROJECT_RESEARCH
 
-## E220-900T22D
+## Zender ESP32
+
+### E220-900T22D
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
 | LoRa E220     | Opmerkingen                         |
@@ -15,7 +17,7 @@
 
 ## Zender (ESP32/...)
 
-### Referentie componenten
+#### Referentie componenten
 - [Ebyte LoRa E220 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
 - [U-Blox NEO 6m datasheet](https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf)
 - [analog One wire thermometer - DS18B20](https://www.analog.com/media/en/technical-documentation/data-sheets/ds18b20.pdf)
@@ -35,6 +37,108 @@
 #### extra benodigheid:
 - Lora gluestick antenna: Om het bereik van de lora te vergroten hebben wij een Lora gluestick antenna gebruikt die werkt op 840hz
 
+#### Code Preview
+```
+#include "LoRa_E220.h"          // Lora header
+
+LoRa_E220 e22ttl(&Serial2, 18, 21, 19); //  RX AUX M0 M1
+
+static constexpr int E220_RX2_PIN = 16; // ESP32 RX2 pin (input from E220 TX)
+static constexpr int E220_TX2_PIN = 17; // ESP32 TX2 pin (output to E220 RX)
+
+// baudrate van de seriale communicatie
+Serial.begin(9600);
+
+ Serial2.begin(9600, SERIAL_8N1, E220_RX2_PIN, E220_TX2_PIN);   
+    // Seriele communicatie poort openen voor de Lora module
+    // Start module
+e22ttl.begin();
+
+// Read current configuration
+ResponseStructContainer c = e22ttl.getConfiguration();             
+    // een responte struct container c aan gemaakt en deze gelijkgesteld aan de standaard lora configuratie.
+Configuration configuration = *(Configuration*) c.data;            //
+Serial.println(c.status.getResponseDescription());                 //
+Serial.println(c.status.code);
+    
+    // ---------------------- Configure module ----------------------
+configuration.ADDH = 0x00;      
+configuration.ADDL = 0x01;    // node address 
+configuration.CHAN = 0x12;    // Channel for 868 MHz (check datasheet)
+    
+    // UART and Air settings
+configuration.SPED.uartBaudRate = UART_BPS_9600;        // baudrate voor de UART
+configuration.SPED.airDataRate = AIR_DATA_RATE_010_24;  // 2.4 kbps
+configuration.SPED.uartParity = MODE_00_8N1;            // uart pariteits bit --> geen parititeitsbit 8databits 1 stopbit
+    // ----------------------------------------------------------------
+configuration.
+TRANSMISSION_MODE.fixedTransmission = FT_TRANSPARENT_TRANSMISSION; 
+    // transparent transmission worgt ervoor dat we kunnen versturen en verzenden van alle e channels met hetzelfde address
+
+    // Save configuration to module
+ResponseStatus rs = e22ttl.setConfiguration(configuration, WRITE_CFG_PWR_DWN_SAVE); 
+    // de configuratie wordt nu opgeslagen in de lora module en slaat deze op in de responsestatus struct
+Serial.println(rs.getResponseDescription());                                                    
+    // de response status discriptie printen
+Serial.println(rs.code);                                                              
+    //de response status code printen
+
+    // Verify configuration
+c = e22ttl.getConfiguration();
+configuration = *(Configuration*) c.data;
+Serial.println(c.status.getResponseDescription());
+Serial.println(c.status.code);
+printParameters(configuration);
+
+void loop()
+{
+
+    // If something available
+if (e22ttl.available()>1) {
+      // read the String message
+ResponseContainer rc = e22ttl.receiveMessage();
+    // Is something goes wrong print error
+if (rc.status.code!=1){
+    rc.status.getResponseDescription();
+}else{
+    // Print the data received
+Serial.println(rc.data);
+}
+}
+if (Serial.available()) 
+{
+String input = Serial.readString();
+e22ttl.sendMessage(input);
+}
+}
+
+void printParameters(struct Configuration configuration) {
+    Serial.println("----------------------------------------");
+ 
+    Serial.print(F("HEAD : "));  Serial.print(configuration.COMMAND, HEX);Serial.print(" ");Serial.print(configuration.STARTING_ADDRESS, HEX);Serial.print(" ");Serial.println(configuration.LENGHT, HEX);
+    Serial.println(F(" "));
+    Serial.print(F("AddH : "));  Serial.println(configuration.ADDH, HEX);
+    Serial.print(F("AddL : "));  Serial.println(configuration.ADDL, HEX);
+    Serial.println(F(" "));
+    Serial.print(F("Chan : "));  Serial.print(configuration.CHAN, DEC); Serial.print(" -> "); Serial.println(configuration.getChannelDescription());
+    Serial.println(F(" "));
+    Serial.print(F("SpeedParityBit     : "));  Serial.print(configuration.SPED.uartParity, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getUARTParityDescription());
+    Serial.print(F("SpeedUARTDatte     : "));  Serial.print(configuration.SPED.uartBaudRate, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getUARTBaudRateDescription());
+    Serial.print(F("SpeedAirDataRate   : "));  Serial.print(configuration.SPED.airDataRate, BIN);Serial.print(" -> "); Serial.println(configuration.SPED.getAirDataRateDescription());
+    Serial.println(F(" "));
+    Serial.print(F("OptionSubPacketSett: "));  Serial.print(configuration.OPTION.subPacketSetting, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getSubPacketSetting());
+    Serial.print(F("OptionTranPower    : "));  Serial.print(configuration.OPTION.transmissionPower, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getTransmissionPowerDescription());
+    Serial.print(F("OptionRSSIAmbientNo: "));  Serial.print(configuration.OPTION.RSSIAmbientNoise, BIN);Serial.print(" -> "); Serial.println(configuration.OPTION.getRSSIAmbientNoiseEnable());
+    Serial.println(F(" "));
+    Serial.print(F("TransModeWORPeriod : "));  Serial.print(configuration.TRANSMISSION_MODE.WORPeriod, BIN);Serial.print(" -> "); Serial.println(configuration.TRANSMISSION_MODE.getWORPeriodByParamsDescription());
+    Serial.print(F("TransModeEnableLBT : "));  Serial.print(configuration.TRANSMISSION_MODE.enableLBT, BIN);Serial.print(" -> "); Serial.println(configuration.TRANSMISSION_MODE.getLBTEnableByteDescription());
+    Serial.print(F("TransModeEnableRSSI: "));  Serial.print(configuration.TRANSMISSION_MODE.enableRSSI, BIN);Serial.print(" -> "); Serial.println(configuration.TRANSMISSION_MODE.getRSSIEnableByteDescription());
+    Serial.print(F("TransModeFixedTrans: "));  Serial.print(configuration.TRANSMISSION_MODE.fixedTransmission, BIN);Serial.print(" -> "); Serial.println(configuration.TRANSMISSION_MODE.getFixedTransmissionDescription());
+ 
+ 
+    Serial.println("----------------------------------------");
+}
+```
 
 #### bevindingen:
 - We hebben een eerste afstands test gedaan om de afstand van de Lora te testen. Met de huidige Gluestick antenna van 15cm hebben we een afstand van 1.1KM verbinding met onze reciever. Hierna was de powerbank uit gevallen. De Test was uitgevoerd op 4 november
@@ -76,7 +180,7 @@
 
 ### schematic design - breadbord
 
-![transciever schematic](/Afbeeldingen/Tranciever_schematic.jpg)    
+![transciever schematic](/Afbeeldingen/LDRadded.jpg)    
 
 ### bronVermelding: 
 Wij hebben deze website geraadpleegd om de code te maken:

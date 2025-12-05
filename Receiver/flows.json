@@ -1,0 +1,624 @@
+[
+    {
+        "id": "f17571a5d8348a64",
+        "type": "tab",
+        "label": "LoRa",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "flow_lcd_1",
+        "type": "tab",
+        "label": "LCD Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e81306cfa8884393",
+        "type": "serial-port",
+        "name": "LoRa UART",
+        "serialport": "/dev/ttyAMA0",
+        "serialbaud": "9600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "5360d07e6645b0aa",
+        "type": "ui_tab",
+        "name": "LoRa Dashboard",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f94b597caafff148",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "aa1173d11d15d1a9",
+        "type": "ui-theme",
+        "name": "LoRa Dark",
+        "colors": {
+            "surface": "#020617",
+            "primary": "#38bdf8",
+            "bgPage": "#020617",
+            "groupBg": "#0b1120",
+            "groupOutline": "#1f2937"
+        },
+        "sizes": {
+            "pagePadding": "24px",
+            "groupGap": "16px",
+            "groupBorderRadius": "18px",
+            "widgetGap": "14px"
+        }
+    },
+    {
+        "id": "1f77ed83e02b66a8",
+        "type": "ui_group",
+        "name": "Devices",
+        "tab": "5360d07e6645b0aa",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "08bd0238d87e2231",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "loratab1",
+        "type": "ui_tab",
+        "name": "LoRa Dashboard",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c1d2e3f4a5b6c7d8",
+        "type": "ui-theme",
+        "name": "LoRa Dark",
+        "colors": {
+            "surface": "#020617",
+            "primary": "#38bdf8",
+            "bgPage": "#020617",
+            "groupBg": "#0b1120",
+            "groupOutline": "#1f2937"
+        },
+        "sizes": {
+            "pagePadding": "24px",
+            "groupGap": "16px",
+            "groupBorderRadius": "18px",
+            "widgetGap": "14px"
+        }
+    },
+    {
+        "id": "loragroup1",
+        "type": "ui_group",
+        "name": "Devices",
+        "tab": "loratab1",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d089df5330b490a1",
+        "type": "ui-page",
+        "name": "Devices",
+        "ui": "f94b597caafff148",
+        "path": "/devices",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "aa1173d11d15d1a9",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "450dfcc3b5be8f64",
+        "type": "ui-group",
+        "name": "Devices",
+        "page": "d089df5330b490a1",
+        "width": "20",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "f641417f5264b35b",
+        "type": "function",
+        "z": "f17571a5d8348a64",
+        "name": "update_device_cache",
+        "func": "// ===== update_device_cache =====\n\n// Raw reading from LoRa / previous function\nlet d = msg.payload || {};\nconst now = Date.now();\n\n// keep a copy of the original one-device payload (for debugging)\nmsg.current = d;\n\n// choose how long devices stay without updates before we drop them\nconst STALE_MS = 5 * 60 * 1000; // 5 minutes (change as you like)\n\n// determine device name\nlet name = (d.deviceId || d.device || \"\").trim();\n\n// load existing cache from flow context\nlet devices = flow.get(\"devices\") || {};\n\n// 1) clean cache: remove \"unknown\" / empty ids and very old devices\nObject.keys(devices).forEach(id => {\n    const dev = devices[id];\n\n    // remove empty / \"unknown\" ids\n    if (!id || id.toLowerCase() === \"unknown\") {\n        delete devices[id];\n        return;\n    }\n\n    // remove stale devices (no update for STALE_MS)\n    if (dev && dev.lastSeen && (now - dev.lastSeen) > STALE_MS) {\n        delete devices[id];\n        return;\n    }\n});\n\n// 2) if this message has no valid name -> ignore but keep cleaned cache\nif (!name || name.toLowerCase() === \"unknown\") {\n    flow.set(\"devices\", devices);\n    return null;\n}\n\n// 3) update / add this device\ndevices[name] = {\n    ...(devices[name] || {}), // keep previous fields\n    ...d,                     // overwrite with new data\n    deviceId: name,           // normalized deviceId\n    lastSeen: now\n};\n\n// 4) save back to context\nflow.set(\"devices\", devices);\n\n// 5) output:\n//    - payload: array of all devices (for UI)\n//    - current: single reading (already set)\nmsg.payload = Object.values(devices);\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 260,
+        "wires": [
+            [
+                "6c7229fc4aa19d51",
+                "baf4bed279fd48e2"
+            ]
+        ]
+    },
+    {
+        "id": "6c7229fc4aa19d51",
+        "type": "debug",
+        "z": "f17571a5d8348a64",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "baf4bed279fd48e2",
+        "type": "ui-template",
+        "z": "f17571a5d8348a64",
+        "group": "450dfcc3b5be8f64",
+        "page": "",
+        "ui": "",
+        "name": "",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "head": "",
+        "format": "<template>\n  <div class=\"dashboard-shell\">\n    <header class=\"shell-header\">\n      <div>\n        <h2>LoRa Fleet Overview</h2>\n        <p>Live health metrics from your remote devices.</p>\n      </div>\n      <div\n        class=\"device-count\"\n        v-if=\"Array.isArray(msg?.payload)\"\n      >\n        {{ msg.payload.length }} device{{ msg.payload.length === 1 ? \"\" : \"s\" }}\n      </div>\n    </header>\n\n    <section\n      v-if=\"Array.isArray(msg?.payload) && msg.payload.length\"\n      class=\"summary-grid\"\n    >\n      <article\n        class=\"summary-card\"\n        v-for=\"item in summaryCards(msg.payload)\"\n        :key=\"item.label\"\n      >\n        <div class=\"summary-icon\">{{ item.icon }}</div>\n        <div class=\"summary-meta\">\n          <div class=\"summary-label\">{{ item.label }}</div>\n          <div class=\"summary-value\">{{ item.value }}</div>\n          <div class=\"summary-caption\">{{ item.caption }}</div>\n        </div>\n      </article>\n    </section>\n\n    <div\n      v-if=\"Array.isArray(msg?.payload) && msg.payload.length\"\n      class=\"device-grid\"\n    >\n      <article\n        class=\"device-card device-card--neo\"\n        v-for=\"d in msg.payload\"\n        :key=\"d.deviceId || d.device || d.id\"\n        :class=\"{\n          'is-offline': freshnessClass(d.lastSeen) === 'offline',\n          'is-stale': freshnessClass(d.lastSeen) === 'idle'\n        }\"\n      >\n        <header class=\"card-header card-header--neo\">\n          <div class=\"identity\">\n            <span\n              class=\"status-dot\"\n              :class=\"freshnessClass(d.lastSeen)\"\n            ></span>\n            <div class=\"identity-text\">\n              <span class=\"device-name\">\n                {{ d.deviceId || d.device || \"Unnamed device\" }}\n              </span>\n              <span\n                class=\"identity-sub\"\n                v-if=\"d.statusText\"\n              >\n                {{ d.statusText }}\n              </span>\n            </div>\n          </div>\n          <div class=\"card-header-right\">\n            <span\n              class=\"status-pill\"\n              :class=\"freshnessClass(d.lastSeen)\"\n            >\n              {{ statusLabel(d.lastSeen) }}\n            </span>\n            <span class=\"last-seen\">\n              <strong>Last:</strong>\n              {{ formatLastSeen(d.lastSeen) }}\n            </span>\n          </div>\n        </header>\n\n        <section\n          class=\"card-hero card-hero--neo\"\n          :class=\"temperatureBand(d.tempC)\"\n        >\n          <div class=\"hero-temp hero-temp--badge\">\n            <div class=\"hero-temp-circle\">\n              <span class=\"hero-value\">\n                {{\n                  d.tempC_str\n                    ? d.tempC_str\n                    : Number.isFinite(d.tempC)\n                    ? d.tempC.toFixed(1)\n                    : \"—\"\n                }}\n              </span>\n              <span class=\"hero-unit\">°C</span>\n            </div>\n          </div>\n\n          <div class=\"hero-meta hero-meta--grid\">\n            <div\n              class=\"hero-stat\"\n              v-if=\"Number.isFinite(d.lat) && Number.isFinite(d.lon)\"\n            >\n              <span class=\"hero-label\">GPS lock</span>\n              <a\n                class=\"hero-data link\"\n                :href=\"`https://www.google.com/maps?q=${d.lat},${d.lon}`\"\n                target=\"_blank\"\n                rel=\"noopener noreferrer\"\n              >\n                {{ d.lat.toFixed(5) }}, {{ d.lon.toFixed(5) }}\n              </a>\n            </div>\n            <div class=\"hero-stat\" v-if=\"Number.isFinite(d.alt)\">\n              <span class=\"hero-label\">Altitude</span>\n              <span class=\"hero-data\">{{ Math.round(d.alt) }} m</span>\n            </div>\n            <div class=\"hero-stat\" v-if=\"Number.isFinite(d.sats)\">\n              <span class=\"hero-label\">Satellites</span>\n              <span class=\"hero-data\">{{ d.sats }}</span>\n            </div>\n            <div class=\"hero-stat\" v-if=\"d.ts\">\n              <span class=\"hero-label\">Packet age</span>\n              <span class=\"hero-data\">{{ d.ts }}</span>\n            </div>\n          </div>\n        </section>\n\n        <section class=\"metric-row metric-row--chips\">\n          <div class=\"metric-chip\" v-if=\"Number.isFinite(d.rssi)\">\n            <span class=\"metric-chip-icon\">📶</span>\n            <div class=\"metric-chip-text\">\n              <span class=\"metric-chip-label\">Signal</span>\n              <span class=\"metric-chip-value\">{{ d.rssi.toFixed(0) }} dBm</span>\n            </div>\n          </div>\n          <div class=\"metric-chip\" v-if=\"Number.isFinite(d.battery)\">\n            <span class=\"metric-chip-icon\">🔋</span>\n            <div class=\"metric-chip-text\">\n              <span class=\"metric-chip-label\">Battery</span>\n              <span class=\"metric-chip-value\">{{ Math.round(d.battery) }}%</span>\n            </div>\n          </div>\n          <div class=\"metric-chip\" v-if=\"Number.isFinite(d.alt)\">\n            <span class=\"metric-chip-icon\">�</span>\n            <div class=\"metric-chip-text\">\n              <span class=\"metric-chip-label\">Altitude</span>\n              <span class=\"metric-chip-value\">{{ Math.round(d.alt) }} m</span>\n            </div>\n          </div>\n          <div class=\"metric-chip\" v-if=\"d.ts\">\n            <span class=\"metric-chip-icon\">⏱️</span>\n            <div class=\"metric-chip-text\">\n              <span class=\"metric-chip-label\">Packet age</span>\n              <span class=\"metric-chip-value\">{{ d.ts }}</span>\n            </div>\n          </div>\n        </section>\n\n        <div class=\"card-actions card-actions--neo\">\n          <div class=\"card-actions-left\" v-if=\"Number.isFinite(d.lat) && Number.isFinite(d.lon)\">\n            <a\n              class=\"ghost-button primary\"\n              :href=\"`https://www.google.com/maps?q=${d.lat},${d.lon}`\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n            >\n              <span class=\"button-icon\">🗺️</span>\n              View on map\n            </a>\n            <button\n              type=\"button\"\n              class=\"ghost-button\"\n              @click=\"copyCoordinates(d)\"\n            >\n              <span class=\"button-icon\">📋</span>\n              Copy coords\n            </button>\n          </div>\n          <div\n            class=\"card-actions-left card-actions-left--disabled\"\n            v-else\n          >\n            <span class=\"no-fix\">No GPS fix yet</span>\n          </div>\n          <div class=\"card-actions-right\">\n            <button\n              type=\"button\"\n              class=\"ghost-button danger\"\n              @click=\"removeDevice(d)\"\n            >\n              <span class=\"button-icon\">🗑️</span>\n              Remove\n            </button>\n          </div>\n        </div>\n\n        <footer class=\"card-footer card-footer--neo\">\n          <span class=\"tag\" v-if=\"Number.isFinite(d.tempC) && d.tempC > 28\">High temp</span>\n          <span class=\"tag\" v-if=\"Number.isFinite(d.tempC) && d.tempC < 5\">Cold alert</span>\n          <span class=\"tag\" v-if=\"Number.isFinite(d.sats) && d.sats < 4\">Weak GPS</span>\n          <span class=\"tag\" v-if=\"Number.isFinite(d.battery) && d.battery < 20\">Low battery</span>\n          <span class=\"tag muted\" v-if=\"d.fwVersion\">FW {{ d.fwVersion }}</span>\n        </footer>\n      </article>\n    </div>\n\n    <div v-else class=\"empty-state\">\n      <div class=\"empty-icon\">📡</div>\n      <h3>No LoRa devices yet…</h3>\n      <p>Waiting for data from your device. They will appear here as soon as a payload arrives.</p>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  :root {\n    color-scheme: dark;\n  }\n\n  .dashboard-shell {\n    display: flex;\n    flex-direction: column;\n    gap: 22px;\n    padding: 14px;\n    color: #e8edf5;\n    font-family: \"Inter\", \"Segoe UI\", sans-serif;\n  }\n\n  .shell-header {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: flex-start;\n    justify-content: space-between;\n    gap: 12px;\n    background: linear-gradient(135deg, rgba(30, 64, 175, 0.45), rgba(15, 23, 42, 0.7));\n    padding: 16px 20px;\n    border-radius: 16px;\n    border: 1px solid rgba(59, 130, 246, 0.25);\n    box-shadow: 0 18px 32px rgba(15, 23, 42, 0.35);\n  }\n\n  .shell-header h2 {\n    margin: 0;\n    font-size: 26px;\n    font-weight: 700;\n    letter-spacing: 0.3px;\n  }\n\n  .shell-header p {\n    margin: 4px 0 0;\n    font-size: 14px;\n    color: #94a3b8;\n  }\n\n  .device-count {\n    align-self: flex-start;\n    padding: 6px 14px;\n    border-radius: 999px;\n    background: rgba(59, 130, 246, 0.16);\n    border: 1px solid rgba(59, 130, 246, 0.35);\n    font-size: 13px;\n    font-weight: 600;\n    color: #60a5fa;\n  }\n\n  .summary-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));\n    gap: 16px;\n  }\n\n  .summary-card {\n    display: flex;\n    gap: 12px;\n    align-items: center;\n    padding: 16px 18px;\n    border-radius: 16px;\n    background: linear-gradient(120deg, rgba(59, 130, 246, 0.14), rgba(15, 23, 42, 0.86));\n    border: 1px solid rgba(148, 163, 184, 0.22);\n    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.28);\n    backdrop-filter: blur(4px);\n  }\n\n  .summary-icon {\n    font-size: 24px;\n  }\n\n  .summary-label {\n    font-size: 12px;\n    text-transform: uppercase;\n    letter-spacing: 0.08em;\n    color: #94a3b8;\n  }\n\n  .summary-value {\n    font-size: 22px;\n    font-weight: 700;\n    color: #f8fafc;\n  }\n\n  .summary-caption {\n    font-size: 12px;\n    color: #a3b4ce;\n  }\n\n  .device-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));\n    gap: 20px;\n  }\n\n  .device-card {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    gap: 18px;\n    padding: 22px;\n    border-radius: 20px;\n    background: radial-gradient(140% 140% at 0% 0%, rgba(96, 165, 250, 0.28), rgba(15, 23, 42, 0.94));\n    border: 1px solid rgba(148, 163, 184, 0.18);\n    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);\n    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;\n    backdrop-filter: blur(7px);\n  }\n\n  .device-card:hover {\n    transform: translateY(-5px);\n    border-color: rgba(96, 165, 250, 0.45);\n    box-shadow: 0 24px 48px rgba(37, 99, 235, 0.27);\n  }\n\n  .device-card.is-offline {\n    background: radial-gradient(140% 140% at 0% 0%, rgba(248, 113, 113, 0.32), rgba(15, 23, 42, 0.95));\n    border-color: rgba(248, 113, 113, 0.32);\n  }\n\n  .device-card.is-stale:not(.is-offline) {\n    background: radial-gradient(140% 140% at 0% 0%, rgba(248, 184, 36, 0.28), rgba(15, 23, 42, 0.95));\n    border-color: rgba(248, 184, 36, 0.28);\n  }\n\n  .card-header {\n    display: flex;\n    flex-direction: column;\n    gap: 8px;\n  }\n\n  .card-top {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 12px;\n  }\n\n  .identity {\n    display: flex;\n    align-items: center;\n    gap: 10px;\n  }\n\n  .device-name {\n    font-size: 20px;\n    font-weight: 700;\n    letter-spacing: 0.2px;\n  }\n\n  .status-dot {\n    width: 10px;\n    height: 10px;\n    border-radius: 50%;\n    box-shadow: 0 0 8px currentColor;\n  }\n\n  .status-dot.online {\n    color: #34d399;\n  }\n\n  .status-dot.idle {\n    color: #facc15;\n  }\n\n  .status-dot.offline {\n    color: #f87171;\n  }\n\n  .status-pill {\n    padding: 4px 10px;\n    border-radius: 999px;\n    font-size: 12px;\n    font-weight: 600;\n    text-transform: uppercase;\n    letter-spacing: 0.08em;\n    border: 1px solid transparent;\n    color: #0f172a;\n  }\n\n  .status-pill.online {\n    background: rgba(34, 197, 94, 0.22);\n    border-color: rgba(34, 197, 94, 0.45);\n    color: #bbf7d0;\n  }\n\n  .status-pill.idle {\n    background: rgba(234, 179, 8, 0.2);\n    border-color: rgba(234, 179, 8, 0.4);\n    color: #fef3c7;\n  }\n\n  .status-pill.offline {\n    background: rgba(248, 113, 113, 0.2);\n    border-color: rgba(248, 113, 113, 0.4);\n    color: #fecaca;\n  }\n\n  .last-seen {\n    font-size: 13px;\n    color: #b0bbcb;\n  }\n\n  .last-seen strong {\n    color: #94a3b8;\n    font-weight: 600;\n    margin-right: 4px;\n  }\n\n  .card-body {\n    display: flex;\n    flex-direction: column;\n    gap: 18px;\n    padding: 20px 22px;\n    border-radius: 18px;\n    background: rgba(15, 23, 42, 0.78);\n    border: 1px solid rgba(148, 163, 184, 0.18);\n    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.24);\n  }\n\n  .card-hero {\n    display: flex;\n    flex-direction: column;\n    gap: 14px;\n    padding: 18px 20px;\n    border-radius: 16px;\n    position: relative;\n    overflow: hidden;\n    border: 1px solid transparent;\n    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(15, 23, 42, 0.85));\n  }\n\n  .card-hero.cool {\n    background: linear-gradient(135deg, rgba(96, 165, 250, 0.24), rgba(15, 23, 42, 0.88));\n    border-color: rgba(96, 165, 250, 0.38);\n  }\n\n  .card-hero.warm {\n    background: linear-gradient(135deg, rgba(234, 179, 8, 0.22), rgba(15, 23, 42, 0.88));\n    border-color: rgba(234, 179, 8, 0.35);\n  }\n\n  .card-hero.hot {\n    background: linear-gradient(135deg, rgba(248, 113, 113, 0.24), rgba(15, 23, 42, 0.9));\n    border-color: rgba(248, 113, 113, 0.4);\n  }\n\n  .hero-temp {\n    display: flex;\n    align-items: flex-end;\n    gap: 6px;\n  }\n\n  .hero-value {\n    font-size: 44px;\n    font-weight: 700;\n    line-height: 0.9;\n    color: #f8fafc;\n  }\n\n  .hero-unit {\n    font-size: 18px;\n    font-weight: 600;\n    color: rgba(226, 232, 240, 0.85);\n    margin-bottom: 6px;\n  }\n\n  .hero-meta {\n    display: grid;\n    gap: 8px;\n  }\n\n  .hero-line {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    font-size: 13px;\n    color: #e2e8f0;\n  }\n\n  .hero-label {\n    text-transform: uppercase;\n    letter-spacing: 0.08em;\n    color: rgba(148, 163, 184, 0.85);\n    font-size: 11px;\n  }\n\n  .hero-data {\n    font-size: 14px;\n    font-weight: 600;\n    color: #e2e8f0;\n  }\n\n  .hero-data.link {\n    color: #93c5fd;\n    text-decoration: none;\n  }\n\n  .hero-data.link:hover {\n    text-decoration: underline;\n  }\n\n  .metric-list {\n    display: flex;\n    flex-direction: column;\n    gap: 14px;\n  }\n\n  .metric-item {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    padding: 8px 0;\n    border-bottom: 1px solid rgba(148, 163, 184, 0.1);\n  }\n\n  .metric-item:last-child {\n    border-bottom: none;\n  }\n\n  .metric-icon {\n    font-size: 18px;\n    filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.28));\n  }\n\n  .metric-text {\n    display: flex;\n    flex-direction: column;\n    gap: 3px;\n  }\n\n  .metric-label {\n    font-size: 11px;\n    text-transform: uppercase;\n    letter-spacing: 0.08em;\n    color: rgba(148, 163, 184, 0.85);\n  }\n\n  .metric-value {\n    font-size: 15px;\n    font-weight: 600;\n    color: #e2e8f0;\n    word-break: break-word;\n  }\n\n  .card-actions {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 10px;\n  }\n\n  .ghost-button {\n    display: inline-flex;\n    align-items: center;\n    gap: 8px;\n    padding: 8px 18px;\n    border-radius: 999px;\n    border: 1px solid rgba(148, 163, 184, 0.32);\n    background: rgba(15, 23, 42, 0.6);\n    color: #cbd5f5;\n    font-size: 12px;\n    font-weight: 600;\n    letter-spacing: 0.04em;\n    text-transform: uppercase;\n    cursor: pointer;\n    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;\n  }\n\n  .ghost-button:hover {\n    border-color: rgba(148, 163, 184, 0.55);\n    background: rgba(30, 41, 59, 0.75);\n  }\n\n  .ghost-button.primary {\n    border-color: rgba(59, 130, 246, 0.55);\n    color: #bfdbfe;\n    background: linear-gradient(120deg, rgba(59, 130, 246, 0.25), rgba(30, 64, 175, 0.35));\n  }\n\n  .ghost-button.primary:hover {\n    border-color: rgba(59, 130, 246, 0.78);\n    background: linear-gradient(120deg, rgba(59, 130, 246, 0.35), rgba(30, 64, 175, 0.45));\n  }\n\n  .ghost-button.danger {\n    border-color: rgba(248, 113, 113, 0.38);\n    color: #fecaca;\n    background: linear-gradient(120deg, rgba(248, 113, 113, 0.08), rgba(15, 23, 42, 0.6));\n  }\n\n  .ghost-button.danger:hover {\n    border-color: rgba(248, 113, 113, 0.65);\n    background: linear-gradient(120deg, rgba(248, 113, 113, 0.14), rgba(30, 41, 59, 0.75));\n  }\n\n  .button-icon {\n    font-size: 16px;\n    line-height: 1;\n  }\n\n  @media (max-width: 680px) {\n    .card-body {\n      padding: 18px;\n    }\n\n    .card-hero {\n      padding: 16px;\n    }\n  }\n</style>\n\n<script>\n  export default {\n    methods: {\n      temperatureBand(temp) {\n        if (!Number.isFinite(temp)) return '';\n        if (temp <= 10) return 'cool';\n        if (temp >= 28 && temp < 34) return 'warm';\n        if (temp >= 34) return 'hot';\n        return '';\n      },\n      freshnessClass(lastSeen) {\n        const ts = lastSeen ? new Date(lastSeen).getTime() : NaN;\n        if (!Number.isFinite(ts)) return 'offline';\n        const delta = Date.now() - ts;\n        if (delta <= 5 * 60 * 1000) return 'online';\n        if (delta <= 15 * 60 * 1000) return 'idle';\n        return 'offline';\n      },\n      statusLabel(lastSeen) {\n        const map = {\n          online: 'Online',\n          idle: 'Idle',\n          offline: 'Offline'\n        };\n        return map[this.freshnessClass(lastSeen)] || 'Unknown';\n      },\n      formatLastSeen(lastSeen) {\n        if (!lastSeen) return 'waiting for first payload';\n        const ts = new Date(lastSeen);\n        if (!Number.isFinite(ts.getTime())) return 'unknown timestamp';\n        return ts.toLocaleString([], {\n          hour: '2-digit',\n          minute: '2-digit',\n          second: '2-digit'\n        });\n      },\n      summaryCards(payload) {\n        if (!Array.isArray(payload) || !payload.length) {\n          return [\n            {\n              label: 'Online devices',\n              value: '0',\n              caption: 'No devices reporting yet',\n              icon: '🟢'\n            },\n            {\n              label: 'Average temp',\n              value: '—',\n              caption: 'No temperature data',\n              icon: '🌡️'\n            },\n            {\n              label: 'Weak GPS',\n              value: '0',\n              caption: 'Satellites < 4',\n              icon: '📡'\n            },\n            {\n              label: 'Peak altitude',\n              value: '—',\n              caption: 'Awaiting telemetry',\n              icon: '🗻'\n            }\n          ];\n        }\n\n        const now = Date.now();\n        let online = 0;\n        let idle = 0;\n        let maxAlt = null;\n        let weakGps = 0;\n        const temps = [];\n\n        payload.forEach((device) => {\n          const seenTs = device && device.lastSeen ? new Date(device.lastSeen).getTime() : NaN;\n          if (Number.isFinite(seenTs)) {\n            const delta = now - seenTs;\n            if (delta <= 5 * 60 * 1000) {\n              online += 1;\n            } else if (delta <= 15 * 60 * 1000) {\n              idle += 1;\n            }\n          }\n\n          if (Number.isFinite(device?.tempC)) {\n            temps.push(Number(device.tempC));\n          }\n\n          if (Number.isFinite(device?.alt)) {\n            maxAlt = maxAlt === null ? Number(device.alt) : Math.max(maxAlt, Number(device.alt));\n          }\n\n          if (Number.isFinite(device?.sats) && Number(device.sats) < 4) {\n            weakGps += 1;\n          }\n        });\n\n        const avgTemp = temps.length\n          ? `${(temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1)} °C`\n          : '—';\n        const offline = payload.length - online - idle;\n\n        return [\n          {\n            label: 'Online devices',\n            value: `${online}/${payload.length}`,\n            caption: `Idle ${idle} • Offline ${offline < 0 ? 0 : offline}`,\n            icon: '🟢'\n          },\n          {\n            label: 'Average temp',\n            value: avgTemp,\n            caption: temps.length ? `From ${temps.length} devices` : 'No temperature data',\n            icon: '🌡️'\n          },\n          {\n            label: 'Weak GPS',\n            value: weakGps,\n            caption: 'Satellites < 4',\n            icon: '📡'\n          },\n          {\n            label: 'Peak altitude',\n            value: maxAlt !== null ? `${Math.round(maxAlt)} m` : '—',\n            caption: maxAlt !== null ? 'Highest reported' : 'Awaiting telemetry',\n            icon: '🗻'\n          }\n        ];\n      },\n      copyCoordinates(device) {\n        if (!Number.isFinite(device?.lat) || !Number.isFinite(device?.lon)) return;\n        const coords = `${device.lat}, ${device.lon}`;\n        if (navigator?.clipboard?.writeText) {\n          navigator.clipboard.writeText(coords).catch(() => {\n            window.prompt('Copy coordinates', coords);\n          });\n        } else {\n          window.prompt('Copy coordinates', coords);\n        }\n      }\n      ,\n      removeDevice(device) {\n        const id = device?.deviceId || device?.device || device?.id;\n        const name = device?.deviceId || device?.device || 'Unnamed device';\n        if (!id) return;\n        const ok = window.confirm(`Remove device \"${name}\"? This will delete it from the dashboard.`);\n        if (!ok) return;\n\n        const msg = { payload: { action: 'delete', deviceId: id } };\n\n        if (typeof this?.send === 'function') {\n          this.send(msg);\n          return;\n        }\n\n        if (typeof send === 'function') {\n          send(msg);\n          return;\n        }\n\n        if (typeof scope !== 'undefined' && scope && typeof scope.send === 'function') {\n          scope.send(msg);\n          return;\n        }\n\n        if (window?.parent?.postMessage) {\n          window.parent.postMessage({ type: 'node-red-ui', msg }, '*');\n        }\n      }\n    }\n  };\n</script>\n",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1120,
+        "y": 260,
+        "wires": [
+            [
+                "880034258729b384"
+            ]
+        ]
+    },
+    {
+        "id": "1c8a999f493c7e9a",
+        "type": "comment",
+        "z": "f17571a5d8348a64",
+        "name": "new Dashboard",
+        "info": "",
+        "x": 1120,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "880034258729b384",
+        "type": "function",
+        "z": "f17571a5d8348a64",
+        "name": "handle_device_actions",
+        "func": "const p = msg.payload || {};\n\nif (p.action === \"delete\" && p.deviceId) {\n    let devices = flow.get(\"devices\") || {};\n\n    // remove this device from cache\n    delete devices[p.deviceId];\n\n    flow.set(\"devices\", devices);\n\n    // send updated list back to dashboard\n    msg.payload = Object.values(devices);\n    return msg;\n}\n\n// ignore anything else\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 180,
+        "wires": [
+            [
+                "baf4bed279fd48e2"
+            ]
+        ]
+    },
+    {
+        "id": "fccee81cb1d048b6",
+        "type": "serial in",
+        "z": "f17571a5d8348a64",
+        "name": "LoRa Input",
+        "serial": "e81306cfa8884393",
+        "x": 220,
+        "y": 240,
+        "wires": [
+            [
+                "9fbf8e9e568c0fd2",
+                "6c7229fc4aa19d51"
+            ]
+        ]
+    },
+    {
+        "id": "9fbf8e9e568c0fd2",
+        "type": "function",
+        "z": "f17571a5d8348a64",
+        "name": "robust_decoding",
+        "func": "let text;\ntry {\n    text = msg.payload.toString('utf8'); // decode bytes\n} catch (e) {\n    text = JSON.stringify(msg.payload);  // fallback like Python repr()\n}\nmsg.payload = text;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "196d7468db41c2c7"
+            ]
+        ]
+    },
+    {
+        "id": "196d7468db41c2c7",
+        "type": "function",
+        "z": "f17571a5d8348a64",
+        "name": "parse_lora_json",
+        "func": "let raw = (typeof msg.payload === \"string\") ? msg.payload.trim() : String(msg.payload);\nlet data = { raw };   // raw string altijd bewaren\n\ntry {\n    const obj = JSON.parse(raw);\n    Object.assign(data, obj);  // alle velden van JSON erbij\n} catch (e) {\n    node.warn(\"JSON parse failed, keeping raw only: \" + e);\n}\n\n// Mooie tekst voor locatie\nconst device = data.device !== undefined ? String(data.device) : \"Unknown\";\nconst lat    = data.lat    !== undefined ? String(data.lat)    : \"??\";\nconst lon    = data.lon    !== undefined ? String(data.lon)    : \"??\";\nconst alt    = data.alt    !== undefined ? String(data.alt)    : \"??\";\nconst sats   = data.sats   !== undefined ? String(data.sats)   : \"??\";\n\ndata.location_str =\n  \"Device: \" + device +\n  \" | Lat: \" + lat + \", Lon: \" + lon +\n  \" | Alt: \" + alt + \" m | Sats: \" + sats;\n\n// tempC als nummer + string\nif (typeof data.tempC === \"number\" && !isNaN(data.tempC)) {\n    data.tempC_str = data.tempC.toFixed(2);\n}\n\nmsg.payload = data;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [
+                "f641417f5264b35b"
+            ]
+        ]
+    },
+    {
+        "id": "64e8e2b749aabe15",
+        "type": "inject",
+        "z": "f17571a5d8348a64",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"device\":\"1-DUMMY\",\"lat\":50.928262,\"lon\":5.333635,\"alt\":94.00,\"sats\":7,\"tempC\":22.41,\"tempF\":72.34,\"ts\":3210000}",
+        "payloadType": "str",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "9fbf8e9e568c0fd2"
+            ]
+        ]
+    },
+    {
+        "id": "b3997fbd26e609ee",
+        "type": "inject",
+        "z": "f17571a5d8348a64",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"device\":\"2-DUMMY\",\"lat\":50.928262,\"lon\":5.333635,\"alt\":94.00,\"sats\":7,\"tempC\":22.41,\"tempF\":72.34,\"ts\":3210000}",
+        "payloadType": "str",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "9fbf8e9e568c0fd2"
+            ]
+        ]
+    },
+    {
+        "id": "ce338099cb62ef90",
+        "type": "inject",
+        "z": "f17571a5d8348a64",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"device\":\"3-DUMMY\",\"lat\":50.927950,\"lon\":5.332800,\"alt\":96.00,\"sats\":8,\"tempC\":23.10,\"tempF\":73.58,\"ts\":3250000}",
+        "payloadType": "str",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "9fbf8e9e568c0fd2"
+            ]
+        ]
+    },
+    {
+        "id": "7ea929466fb48be2",
+        "type": "inject",
+        "z": "f17571a5d8348a64",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"device\":\"4-DUMMY\",\"lat\":50.928700,\"lon\":5.334200,\"alt\":92.00,\"sats\":6,\"tempC\":21.85,\"tempF\":71.33,\"ts\":3290000}",
+        "payloadType": "str",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "9fbf8e9e568c0fd2"
+            ]
+        ]
+    },
+    {
+        "id": "cfe406cc56661fac",
+        "type": "LCD-I2C",
+        "z": "f17571a5d8348a64",
+        "name": "",
+        "variant": "PCF8574",
+        "size": "20x4",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5ef306450a2dafaf",
+        "type": "function",
+        "z": "f17571a5d8348a64",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "inject_hello",
+        "type": "inject",
+        "z": "flow_lcd_1",
+        "name": "Send test (Hello Node-RED)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "fn_build_payload"
+            ]
+        ]
+    },
+    {
+        "id": "fn_build_payload",
+        "type": "function",
+        "z": "flow_lcd_1",
+        "name": "Build payload (single line)",
+        "func": "var msg = {\"payload\": [\n    {\n        \"clear\": true,\n        \"text\": \"Line 1 Text\",\n        \"alignment\": \"left\"\n    },\n    {},\n    {},\n    {\n        \"clear\": false,\n        \"text\": \"Line 4 Text\",\n        \"alignment\": \"right\"\n    }\n]};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "fd2062d798ce4ab8"
+            ]
+        ]
+    },
+    {
+        "id": "fd2062d798ce4ab8",
+        "type": "LCD-I2C",
+        "z": "flow_lcd_1",
+        "name": "",
+        "variant": "PCF8574",
+        "size": "20x4",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9f9325b80ed0e55f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-serialport": "2.0.3",
+            "node-red-dashboard": "3.6.6",
+            "@flowfuse/node-red-dashboard": "1.29.0",
+            "node-red-contrib-pcf8574-lcd": "0.1.0"
+        }
+    }
+]
