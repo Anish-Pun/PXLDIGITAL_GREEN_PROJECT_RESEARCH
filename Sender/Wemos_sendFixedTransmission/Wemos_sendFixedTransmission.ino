@@ -105,7 +105,10 @@ void loop() {
     lastSend = millis();
     String msg = String(millis()/1000);
     ResponseStatus rs = e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x12, msg);
-    Serial.println(rs.getResponseDescription());
+    // Check if unsuccesfully send
+		Serial.print(rs.getResponseDescription());
+    Serial.print(": ");
+    Serial.println(msg);
   }
 }
 
