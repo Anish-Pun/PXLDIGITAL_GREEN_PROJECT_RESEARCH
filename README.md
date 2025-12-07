@@ -9,10 +9,10 @@ Voor het eindproduct zijn alle componenten geïntegreerd in een behuizing. De ve
 
 Het eindresultaat is een volledig functioneel prototype dat stabiele LoRa-communicatie, GPS-locatiebepaling, lichtintensiteit- en temperatuurmetingen combineert om te tonen in een dashboard en LCD dat met verdere iteraties online beschikbaar kan worden gemaakt,... .
 
-## Situering
+## Situering (Milan)
 Dit project is voor het verkennen van goedkope draadloze IoT-communicatie, waarbij long-range datatransmissie centraal staat. We gebruiken LoRa-technologie om sensorwaarden over afstanden groter dan 1 km betrouwbaar door te sturen.
 
-## Doelstellingen
+## Doelstellingen (Milan)
 Het doel van deze opdracht is het realiseren van een werkend long-range communicatiesysteem met LoRa-technologie. In de beginfase kozen we de benodigde componenten (LoRa-modules, zender, ontvanger, sensoren, antenne, ...).
 
 De opdracht richt zich op:
