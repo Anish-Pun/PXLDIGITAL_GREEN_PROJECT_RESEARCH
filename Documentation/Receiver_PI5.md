@@ -1,6 +1,6 @@
 ## 2. Ontvanger (Raspberry Pi 5)
 
-### GPIO
+### GPIO (milan)
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
 |-----------|------------------------------|----------------------------------------|
