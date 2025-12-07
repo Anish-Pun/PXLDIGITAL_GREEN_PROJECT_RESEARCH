@@ -5,7 +5,7 @@ Dit project richt zich op het ontwikkelen van een communicatiesysteem op basis v
 
 De LoRa-communicatie is opgezet via UART met een baudrate van 9600 bps, waarbij M0 en M1 IO worden gebruikt om de E220-900T22D-module te kunnen configureren en gebruiken om data te verzenden en ontvangen. Met een 15 cm LoRa-gluestickantenne werd tijdens een veldtest een betrouwbaar maximaal bereik van 1,1 km gerealiseerd. Bij de configuratie wordt onder andere adressen, frequentiekanaal (868 MHz) en de transmissiemodus ingesteld.
 
-Voor het eindproduct zijn alle componenten gesoldeerd op een gaatjesprint en geïntegreerd in een behuizing. De verzender moet in een regenbestandige behuizing met batterij om buiten te kunnen fuctioneren. De ontvanger moet in een grote behuizing gevoedt door netstroom.
+Voor het eindproduct zijn alle componenten geïntegreerd in een behuizing. De verzender moet in een regenbestandige behuizing gesoldeerd op een gaatjesprint met batterijvoeding om buiten te kunnen fuctioneren. De ontvanger moet in een grote behuizing gevoedt door netstroom.
 
 Het eindresultaat is een volledig functioneel prototype dat stabiele LoRa-communicatie, GPS-locatiebepaling, lichtintensiteit- en temperatuurmetingen combineert om te tonen in een dashboard en LCD dat met verdere iteraties online beschikbaar kan worden gemaakt,... .
 
