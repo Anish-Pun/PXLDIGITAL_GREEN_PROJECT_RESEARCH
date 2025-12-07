@@ -204,29 +204,6 @@ Wij hebben deze website geraadpleegd om de code te maken:
 
 ![GPIO Raspberry Pi](/GPIO's/Raspberry-Pi-5-Pinout--189012982.jpg)    
 
-### Configuratie E220
-
-1. M0 & M1 : 3.3 V / HIGH				      ( Configuration / Sleep mode )
-2. Wacht tot AUX uitgang = HIGH 			( E220 niet bezig )
-3. Verzend @-command					( UART )
-4. Wacht tot AUX = HIGH 			
-5. Lees alles wat E220 beantwoordt		( UART )
-6. Stap 3 OF exit config M0 & M1 : GND	( Transmission mode )
-7. Wacht tot AUX = HIGH
-8. Ontvang / Verzend LoRa berichten …
-
-Code: Receiver/reset_config_pi5/config+reset.py
-
-### Controle UART (pi 5)
-
-```
-cat /boot/firmware/config.txt
-```
-Verwacht resultaat:
-[all]
-dtparam=uart0=on
-
-
 ## Opmerkingen
 
 1. UART-baudrate is zowel zender als ontvanger 9600 bps.  
