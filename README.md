@@ -1,13 +1,27 @@
 # PXLDIGITAL_GREEN_PROJECT_RESEARCH
 
 ## Abstract (Milan)
-Dit project richt zich op het ontwikkelen van een communicatiesysteem op basis van LoRa E220-900T22D-modules, waarbij een microcontroller (ESP32,...) als zender en een Raspberry Pi 5 als ontvanger. Naast de configuratie en integratie van de LoRa-modules worden ook een U-Blox NEO-6M GPS-ontvanger, DS18B20 temperatuursensor en een LDR toegepast.
+Dit project richt zich op het ontwikkelen van een communicatiesysteem op basis van LoRa E220-900T22D-modules, waarbij een microcontroller (ESP32,...) als zender en een Raspberry Pi 5 als ontvanger. Naast de configuratie en integratie van de LoRa-modules worden ook een NEO-6M GPS-ontvanger, DS18B20 temperatuursensor en een LDR toegepast.
 
 De LoRa-communicatie is opgezet via UART met een baudrate van 9600 bps, waarbij M0 en M1 IO worden gebruikt om de E220-900T22D-module te kunnen configureren en gebruiken om data te verzenden en ontvangen. Met een 15 cm LoRa-gluestickantenne werd tijdens een veldtest een betrouwbaar maximaal bereik van 1,1 km gerealiseerd. Bij de configuratie wordt onder andere adressen, frequentiekanaal (868 MHz) en de transmissiemodus ingesteld.
 
 Voor het eindproduct zijn alle componenten geïntegreerd in een behuizing. De verzender moet in een regenbestandige behuizing gesoldeerd op een gaatjesprint met batterijvoeding om buiten te kunnen fuctioneren. De ontvanger moet in een grote behuizing gevoedt door netstroom.
 
 Het eindresultaat is een volledig functioneel prototype dat stabiele LoRa-communicatie, GPS-locatiebepaling, lichtintensiteit- en temperatuurmetingen combineert om te tonen in een dashboard en LCD dat met verdere iteraties online beschikbaar kan worden gemaakt,... .
+
+## Situering
+Dit project is voor het verkennen van goedkope draadloze IoT-communicatie, waarbij long-range datatransmissie centraal staat. We gebruiken LoRa-technologie om sensorwaarden over afstanden groter dan 1 km betrouwbaar door te sturen.
+
+## Doelstellingen
+Het doel van deze opdracht is het realiseren van een werkend long-range communicatiesysteem met LoRa-technologie. In de beginfase kozen we de benodigde componenten (LoRa-modules, zender, ontvanger, sensoren, antenne, ...).
+
+De opdracht richt zich op:
+- Het configureren en testen van de LoRa E220-modules.
+- Het integreren van de GPS-module (NEO-6M), temperatuur­sensor (DS18B20) en LDR.
+- Het bouwen van een afgewerkt systeem door alle onderdelen in een passende behuizing te plaatsen.
+- Het uitvoeren van praktijktests om bereik en betrouwbaarheid te evalueren.
+
+Het uiteindelijke doel is een stabiel en volledig functioneel communicatiesysteem dat langeafstandsdata kan verzenden en ontvangen.
 
 ## 0. E220-900T22D (milan)
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
