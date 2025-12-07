@@ -23,6 +23,12 @@ De opdracht richt zich op:
 
 Het uiteindelijke doel is een stabiel en volledig functioneel communicatiesysteem dat langeafstandsdata kan verzenden en ontvangen.
 
+# Uitwerking opdracht (Milan)
+
+De uitwerking van deze opdracht omvat **vijf kernonderdelen**. Eerst werd de **LoRa E220-900T22D-module** onderzocht om de **configuratie en transmissie** te kunnen gebruiken. Vervolgens werd een verzenderopstelling gebouwd waarin verschillende **sensoren** gekoppeld zijn aan een ESP32-module. Ook werd een ontvangeropstelling ontwikkeld uitgerust met een **LCD-scherm**, **dashboard**, **ON/OFF-knop** binnen Node-RED met een **automatische opstartconfiguratie** .
+
+Daarna worden de **verzenders gesoldeerd** op **gaatjesprints** en voorzien van een **passende behuizing** met **batterijvoeding**. Ook de **ontvanger** wordt in een **behuizing** geplaatst en **aangesloten op netstroom**, zodat een **volledig afgewerkt systeem** ontstaat.
+
 ## 0. E220-900T22D (milan)
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
