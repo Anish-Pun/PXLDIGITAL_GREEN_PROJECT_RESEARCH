@@ -1,8 +1,15 @@
 # PXLDIGITAL_GREEN_PROJECT_RESEARCH
 
-## Zender ESP32
+## Abstract (Milan)
+Dit project richt zich op het ontwikkelen van een communicatiesysteem op basis van LoRa E220-900T22D-modules, waarbij een microcontroller (ESP32,...) als zender en een Raspberry Pi 5 als ontvanger. Naast de configuratie en integratie van de LoRa-modules worden ook een U-Blox NEO-6M GPS-ontvanger, DS18B20 temperatuursensor en een LDR toegepast.
 
-### E220-900T22D
+De LoRa-communicatie is opgezet via UART met een baudrate van 9600 bps, waarbij M0 en M1 IO worden gebruikt om de E220-900T22D-module te kunnen configureren en gebruiken om data te verzenden en ontvangen. Met een 15 cm LoRa-gluestickantenne werd tijdens een veldtest een betrouwbaar maximaal bereik van 1,1 km gerealiseerd. Bij de configuratie wordt onder andere adressen, frequentiekanaal (868 MHz) en de transmissiemodus ingesteld.
+
+Voor het eindproduct zijn alle componenten gesoldeerd op een gaatjesprint en geïntegreerd in een behuizing. De verzender moet in een regenbestandige behuizing met batterij om buiten te kunnen fuctioneren. De ontvanger moet in een grote behuizing gevoedt door netstroom.
+
+Het eindresultaat is een volledig functioneel prototype dat stabiele LoRa-communicatie, GPS-locatiebepaling, lichtintensiteit- en temperatuurmetingen combineert om te tonen in een dashboard en LCD dat met verdere iteraties online beschikbaar kan worden gemaakt,... .
+
+## 0. E220-900T22D (milan)
 - [Ebyte LoRa E220-900T22D – Manual + Configer Tool](https://www.cdebyte.com/products/E220-900T22D/4#Downloads/)
 
 | LoRa E220     | Opmerkingen                         |
@@ -15,14 +22,14 @@
 | VCC           | 3.3 V - 5 V                         |
 | GND           | GND                                 |
 
-## Zender (ESP32/...)
+## 1. Zender (ESP32/...)
 
 #### Referentie componenten
 - [Ebyte LoRa E220 Device – Specificaties en Basisgebruik](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
 - [U-Blox NEO 6m datasheet](https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf)
 - [analog One wire thermometer - DS18B20](https://www.analog.com/media/en/technical-documentation/data-sheets/ds18b20.pdf)
 
-### GPIO -- Long range signal -- LoRa E220
+### GPIO -- Long range signal -- LoRa E220 (milan)
 
 | LoRa E220 | ESP32           | Opmerkingen                         |
 |-----------|-----------------|-------------------------------------|
@@ -186,9 +193,10 @@ void printParameters(struct Configuration configuration) {
 Wij hebben deze website geraadpleegd om de code te maken:
 - [code voor temperatuur sensor!](https://randomnerdtutorials.com/esp32-ds18b20-temperature-arduino-ide/)
 - [code voor de Lora module!](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
+
 ## 2. Ontvanger (Raspberry Pi)
 
-### GPIO
+### GPIO (milan)
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
 |-----------|------------------------------|----------------------------------------|
