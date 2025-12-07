@@ -188,8 +188,6 @@ Wij hebben deze website geraadpleegd om de code te maken:
 - [code voor de Lora module!](https://mischianti.org/ebyte-lora-e220-llcc68-device-for-arduino-esp32-or-esp8266-specs-and-basic-use-1/)
 ## 2. Ontvanger (Raspberry Pi)
 
-### Referenties
-
 ### GPIO
 
 | LoRa E220 | Raspberry Pi                 | Opmerkingen /dev/ttyAMA0               |
@@ -204,9 +202,8 @@ Wij hebben deze website geraadpleegd om de code te maken:
 
 ![GPIO Raspberry Pi](/GPIO's/Raspberry-Pi-5-Pinout--189012982.jpg)    
 
-## Opmerkingen
+## Opmerkingen (milan)
 
 1. UART-baudrate is zowel zender als ontvanger 9600 bps.  
 2. Pull-up weerstanden (4.7kΩ–5.1kΩ) op de TX/RX/AUX lijnen verbeteren de signaalstabiliteit. (optioneel)
-3. Als M0 = GND, M1 = GND => Beide modules werken in **Normale modus** voor peer-to-peer communicatie.  
 4. De AUX pin kan optioneel worden aangesloten op een GPIO om de status van de module te monitoren.
