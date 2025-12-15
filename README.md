@@ -55,20 +55,22 @@ Daarna worden de **verzenders gesoldeerd** op **gaatjesprints** en voorzien van 
 
 ### GPIO -- Long range signal -- LoRa E220 (milan)
 
-| LoRa E220 | ESP32           | Opmerkingen                         |
-|-----------|-----------------|-------------------------------------|
-| M0        | 21 / D21        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
-| M1        | 19 / D19        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
-| TX        | RX2 / D16       | Communicatie UART       |
-| RX        | TX2 / D17       | Communicatie  UART       |
-| AUX       | AUX: D22/23     | Busy status E220         |
-| VCC       | 3.3 V - 5 V     | Voeding                              |
-| GND       | GND             | Aarde                                |
+| LoRa E220 | ESP32           | Wemos D1 Mini Pro | Opmerkingen                         |
+|-----------|-----------------|-----------------|-------------------------------------|
+| M0        | 21 / D21        | D7           | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
+| M1        | 19 / D19        | D6           | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
+| TX        | RX2 / D16       | D2           | Communicatie UART       |
+| RX        | TX2 / D17       | D1           | Communicatie  UART       |
+| AUX       | AUX: D22/23     | D5           | Busy status E220         |
+| VCC       | 3.3 V - 5 V     | 5 V          | Voeding                              |
+| GND       | GND             | GND          | Aarde                                |
+
+Voorbeeldcode met FT_FIXED_TRANSMISSION zie: ```/Sender/Wemos_sendFixedTransmission.ino``` & ```Receiver/ESP32_receiveFixedTransmission/ESP32_receiveFixedTransmission.ino```
 
 #### extra benodigheid:
 - Lora gluestick antenna: Om het bereik van de lora te vergroten hebben wij een Lora gluestick antenna gebruikt die werkt op 840hz
 
-#### Code Preview
+#### Code Preview (FT_TRANSPARENT_TRANSMISSION)
 ```
 #include "LoRa_E220.h"          // Lora header
 
