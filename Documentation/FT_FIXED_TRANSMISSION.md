@@ -3,7 +3,7 @@
 Dit document beschrijft de configuratie, werking en toepassing van de EBYTE LoRa E220-module in combinatie met de Wemos D1 Mini Pro als verzender en ESP32 als ontvanger. 
 De focus ligt op Fixed Transmission binnen het 868 MHz ISM-spectrum. Bij Fixed Transmission wordt elk bericht verzonden met een expliciet bestemmingsadres en kanaal. 
 
-## GPIO -- Long range signal -- E220-900T22D (milan)
+## GPIO -- E220-900T22D -- Microcontrollers (milan)
 
 | LoRa E220 | ESP32           | Wemos D1 Mini Pro   | Opmerkingen                         |
 |-----------|-----------------|---------------------|-------------------------------------|
@@ -50,9 +50,9 @@ De ontvanger is geconfigureerd met:
 - configuration.ADDL = <b>0x02</b> ;
 
 Dit resulteert in het adres 0x00<b>02</b>. In de code van de verzendert wordt dit aangeduid met:
-
+``` 
 #define DESTINATION_ADDL 2
-
+``` 
 Bij Fixed Transmission wordt het bestemmingsadres expliciet opgenomen in elk verzonden bericht. Hierdoor accepteert uitsluitend de LoRa-module met adres 0x0002 het bericht; andere modules op hetzelfde kanaal negeren deze transmissie.
 
 #### Relatie tussen zender en ontvanger
