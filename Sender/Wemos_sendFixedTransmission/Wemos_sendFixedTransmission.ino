@@ -13,7 +13,6 @@
  * AUX        ----- D5 (PullUP)		----- 18  (PullUP)	----- 2  (PullUP)			----- 0  (PullUP)	----- 2  (PullUP)	      ----- PA0  (PullUP)       ----- 3 (PullUP)
  * VCC        ----- 3.3v/5v			----- 3.3v/5v		----- 3.3v/5v				----- 3.3v/5v		----- 3.3v/5v		      ----- 3.3v/5v             ----- 3.3v/5v
  * GND        ----- GND				----- GND			----- GND					----- GND			----- GND			      ----- GND                 ----- GND
- *
  */
 
 #define E220_22
@@ -34,7 +33,7 @@
 #define PIN_M0  D7
 #define PIN_M1  D6
 
-SoftwareSerial e220Serial(PIN_RX, PIN_TX); // RX D3,TX D4
+SoftwareSerial e220Serial(PIN_RX, PIN_TX);
 LoRa_E220 e220ttl(&e220Serial, PIN_AUX, PIN_M0, PIN_M1);
 
 void printParameters(struct Configuration configuration);
