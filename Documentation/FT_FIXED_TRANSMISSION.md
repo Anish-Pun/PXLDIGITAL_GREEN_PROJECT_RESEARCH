@@ -86,10 +86,10 @@ De functie ```e220ttl.sendFixedMessage()``` verzendt een bericht naar module met
 
 ### Andere configuratiemogelijkheden
 
-- Transmission Mode: ```FT_FIXED_TRANSMISSION```
+- Transmission Mode: ```FT_FIXED_TRANSMISSION``` </br>
     Ervoor zorgen dat Fixed Transmission geactiveert wordt in de module
-- RSSI: ```DISABLED```  </br>
-    RSSI (Received Signal Strength Indicator) voegt extra informatie toe aan ontvangen berichten over de signaalsterkte. In deze configuratie is RSSI uitgeschakeld omdat:
+- RSSI (Received Signal Strength Indicator): ```DISABLED```  </br>
+    RSSI voegt extra informatie toe aan ontvangen berichten over de signaalsterkte. In deze configuratie is RSSI uitgeschakeld omdat:
     - De focus ligt op basiscommunicatie en stabiliteit.
     - Extra data-overhead wordt vermeden.
     - Indien signaalkwaliteit of bereik in detail moet worden geëvalueerd, kan RSSI worden ingeschakeld voor onderzoeksdoeleinden.
