@@ -96,8 +96,7 @@ De functie ```e220ttl.sendFixedMessage()``` verzendt een bericht naar module met
 - LBT (Listen Before Talk): ```DISABLED``` </br>
     LBT zorgt ervoor dat de module eerst controleert of het kanaal vrij is voordat er wordt uitgezonden. In dit onderzoek is LBT uitgeschakeld omdat:
     - Het netwerk bestaat uit een beperkt aantal bekende nodes (4-6 verzenders, 1 ontvanger).
-    - Kanaalcongestie niet wordt verwacht.
-Continue en voorspelbare transmissie gewenst is.
+    - Kanaalcongestie niet wordt verwacht. Continue en voorspelbare transmissie wordt verwacht.
 - WOR-periode: ```2000 ms```  </br>
     WOR (Wake-On-Radio) bepaalt het interval waarin de module uit een laagvermogensmodus ontwaakt om te controleren op inkomende data.  </br>
     WOR is met name enkel relevant voor batterijgevoede ontvangers en sinds enkel verzenders batterijgevoed worden kan dit standaard blijven.
