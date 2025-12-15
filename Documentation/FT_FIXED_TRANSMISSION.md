@@ -49,7 +49,7 @@ De ontvanger is geconfigureerd met:
 - configuration.ADDH = 0x00 ;
 - configuration.ADDL = <b>0x02</b> ;
 
-Dit resulteert in het adres 0x00<b>02</b>. In de code van de verzendert wordt dit aangeduid met:
+Dit resulteert in het adres 0x00<b>02</b>. In de code van de verzender wordt dit aangeduid met:
 ``` 
 #define DESTINATION_ADDL 2
 ``` 
