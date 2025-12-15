@@ -88,18 +88,18 @@ De functie ```e220ttl.sendFixedMessage()``` verzendt een bericht naar module met
 
 - Transmission Mode: ```FT_FIXED_TRANSMISSION```
     Ervoor zorgen dat Fixed Transmission geactiveert wordt in de module
-- RSSI: ```DISABLED```
+- RSSI: ```DISABLED```  </br>
     RSSI (Received Signal Strength Indicator) voegt extra informatie toe aan ontvangen berichten over de signaalsterkte. In deze configuratie is RSSI uitgeschakeld omdat:
     - De focus ligt op basiscommunicatie en stabiliteit.
     - Extra data-overhead wordt vermeden.
     - Indien signaalkwaliteit of bereik in detail moet worden geëvalueerd, kan RSSI worden ingeschakeld voor onderzoeksdoeleinden.
-- LBT (Listen Before Talk): ```DISABLED```
+- LBT (Listen Before Talk): ```DISABLED``` </br>
     LBT zorgt ervoor dat de module eerst controleert of het kanaal vrij is voordat er wordt uitgezonden. In dit onderzoek is LBT uitgeschakeld omdat:
     - Het netwerk bestaat uit een beperkt aantal bekende nodes (4-6 verzenders, 1 ontvanger).
     - Kanaalcongestie niet wordt verwacht.
 Continue en voorspelbare transmissie gewenst is.
-- WOR-periode: ```2000 ms```
-    WOR (Wake-On-Radio) bepaalt het interval waarin de module uit een laagvermogensmodus ontwaakt om te controleren op inkomende data.
+- WOR-periode: ```2000 ms```  </br>
+    WOR (Wake-On-Radio) bepaalt het interval waarin de module uit een laagvermogensmodus ontwaakt om te controleren op inkomende data.  </br>
     WOR is met name enkel relevant voor batterijgevoede ontvangers en sinds enkel verzenders batterijgevoed worden kan dit standaard blijven.
 
 ### Na configuratie
