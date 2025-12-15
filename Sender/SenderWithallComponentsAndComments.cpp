@@ -104,6 +104,9 @@ void setup() {
     configuration.SPED.uartBaudRate = UART_BPS_9600;        // baudrate voor de UART
     configuration.SPED.airDataRate = AIR_DATA_RATE_010_24;  // 2.4 kbps
     configuration.SPED.uartParity = MODE_00_8N1;            // uart pariteits bit --> geen parititeitsbit 8databits 1 stopbit
+  
+    // Zendvermogen voor EU-wetgeving
+    configuration.OPTION.transmissionPower = POWER_10; // TX ≈10 dBm, +5 dBi antenne → EIRP legaal
     // ----------------------------------------------------------------
     configuration.TRANSMISSION_MODE.fixedTransmission = FT_TRANSPARENT_TRANSMISSION; // transparent transmission worgt ervoor dat we kunnen versturen en verzenden van alle e channels met hetzelfde address
 
@@ -223,6 +226,7 @@ void printParameters(struct Configuration configuration) {
  
     Serial.println("----------------------------------------");
 }
+
 void printGetTemps(){
     sensors.requestTemperatures(); 
   float temperatureC = sensors.getTempCByIndex(0);
