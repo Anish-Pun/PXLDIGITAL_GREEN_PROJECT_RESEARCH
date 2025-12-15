@@ -80,5 +80,7 @@ Bij Fixed Transmission kan de channel voor een verzender en onvanger verschillen
 
 De ontvanger kan bijvoorbeeld configuration.CHAN = 0x18; worden, terwijl de verzender 0x12 blijft.
 
-Men moet deze code in de verzender als gevolg ook veranderen:
-``` e220ttl.sendFixedMessage(0, DESTINATION_ADDL, <b>0x18</b>, msg); ```
+Men moet deze code in de verzender als gevolg ook veranderen: </br>
+``` 
+    e220ttl.sendFixedMessage(0, DESTINATION_ADDL, 0x18, msg); 
+```
