@@ -61,7 +61,7 @@ Daarna worden de **verzenders gesoldeerd** op **gaatjesprints** en voorzien van 
 | M1        | 19 / D19        | Normale modus (GND) /  Configuratie modus (+3.3V)                        |
 | TX        | RX2 / D16       | Communicatie UART       |
 | RX        | TX2 / D17       | Communicatie  UART       |
-| AUX       | AUX             | Busy status E220         |
+| AUX       | AUX: D22/23     | Busy status E220         |
 | VCC       | 3.3 V - 5 V     | Voeding                              |
 | GND       | GND             | Aarde                                |
 
